@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="UMI-π: Aligning Perception and Physics for UMI-Style VLA Training" />
+  <title>UMI-π | Aligning Perception and Physics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- 顶栏：滚动后由透明变为实色 -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="#top" class="logo">UMI-<span>π</span></a>
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="#abstract">Abstract</a>
+        <a href="#dual-gap">Dual Gap</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#opensource">Resources</a>
+        <a href="#citation">Citation</a>
+      </nav>
+      <button class="nav-toggle" id="nav-toggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ========== HERO：全屏视频占位 ========== -->
+    <section class="hero" aria-label="首页">
+      <div class="hero-media">
+        <!--
+          【Hero Teaser 视频规格】
+          - 时长：45–90 秒，无配音或轻背景音乐
+          - 内容：三款双臂平台（RealMan / AC one / Galaxea R1 Pro）各 2–3 个成功任务剪辑
+          - 镜头：仅手腕鱼眼视角，与训练分布一致；可快切任务名角标
+          - 格式：MP4 (H.264)，1920×1080，建议 <15MB 便于网页加载
+          - 放置：替换下方 video 的 src，并删除 .placeholder-overlay
+        -->
+        <video class="hero-video" id="hero-video" autoplay muted loop playsinline poster="" aria-hidden="true">
+          <!-- <source src="assets/videos/teaser.mp4" type="video/mp4" /> -->
+        </video>
+        <div class="placeholder-overlay hero-placeholder" data-slot="hero-teaser">
+          <span class="ph-icon" aria-hidden="true">▶</span>
+          <p class="ph-title">Teaser Video · 待上传</p>
+          <p class="ph-hint">RealMan · AC one · R1 Pro 跨平台部署高光剪辑（手腕鱼眼视角）</p>
+        </div>
+        <div class="hero-vignette"></div>
+        <div class="hero-fisheye-mask" aria-hidden="true"></div>
+      </div>
+
+      <div class="hero-content">
+        <p class="hero-eyebrow">From Handheld to Deployable</p>
+        <h1 class="hero-title">UMI-π: Aligning Perception and Physics for UMI-Style VLA Training</h1>
+        <p class="hero-authors">
+          <a href="#">Siyuan Yang</a><sup>1,3,†</sup>,
+          <a href="#">Linzheng Guo</a><sup>1,4,†</sup>,
+          <a href="#">Ouyang Lu</a><sup>1,4</sup>,
+          <a href="#">Daoran Zhang</a><sup>1,5</sup>,
+          <a href="#">Xinmiao Wang</a><sup>1,6</sup>,
+          <a href="#">Ting Xiao</a><sup>5</sup>,
+          <a href="#">Fangzheng Yan</a><sup>1,‡</sup>,
+          <a href="#">Zhijun Chen</a><sup>1,‡</sup>,
+          <a href="#">Yan Ding</a><sup>2,‡</sup>,
+          <a href="#">Chao Yu</a><sup>2,*</sup>,
+          <a href="#">Chenjia Bai</a><sup>1,*</sup>,
+          <a href="#">Xuelong Li</a><sup>1,*</sup>
+        </p>
+        <p class="hero-affiliations">
+          <sup>1</sup>TeleAI &nbsp;·&nbsp;
+          <sup>2</sup>Lumos Robotics &nbsp;·&nbsp;
+          <sup>3</sup>USTC &nbsp;·&nbsp;
+          <sup>4</sup>NWPU &nbsp;·&nbsp;
+          <sup>5</sup>ECUST &nbsp;·&nbsp;
+          <sup>6</sup>HIT
+          <br />
+          <span class="aff-note">† Equal · ‡ Lead · * Corresponding</span>
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#" id="link-paper">Paper (PDF)</a>
+          <a class="btn btn-ghost" href="#" id="link-code">Code</a>
+          <a class="btn btn-ghost" href="#" id="link-dataset">UMI-VQA</a>
+          <a class="btn btn-ghost" href="#" id="link-models">Models</a>
+        </div>
+        <a href="#abstract" class="scroll-cue" aria-label="向下滚动">
+          <span>Scroll</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========== ABSTRACT ========== -->
+    <section class="section section-abstract" id="abstract">
+      <div class="container-narrow">
+        <h2 class="section-label">Abstract</h2>
+        <div class="prose">
+          <p>
+            Universal Manipulation Interface (UMI) enables scalable real-world robot data collection without hardware-specific teleoperation, yet leveraging UMI data to train large-scale Vision-Language-Action (VLA) models remains fundamentally challenging.
+          </p>
+          <p>
+            We identify two critical mismatches: <strong>visual grounding</strong>—wrist-mounted fisheye views with severe radial distortion are out-of-distribution for pretrained VLMs; and <strong>physical plausibility</strong>—human-collected trajectories frequently violate kinematic limits, incur collisions, or exceed controller bandwidth.
+          </p>
+          <p>
+            We present <strong>UMI-π</strong>, bridging this dual gap through three synergistic components: <em>UMI-VQA</em> (8M wrist-fisheye VQA samples), a <em>physical-validation pipeline</em> (reachability, collision, tracking via Mink replay), and <em>two-stage co-training</em> (mixed VQA + discrete action AR, then flow-matching action expert). UMI-π significantly outperforms π<sub>0.5</sub>, LingBot, and Wall-X on simulation and 20 real-world tasks.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== THE DUAL GAP ========== -->
+    <section class="section section-dual-gap" id="dual-gap">
+      <div class="container-wide">
+        <h2 class="section-title center">The Dual Gap</h2>
+        <p class="section-subtitle center">Why raw UMI data breaks standard VLA training</p>
+      </div>
+
+      <!-- 视觉鸿沟：分屏对比 -->
+      <div class="split-compare" id="visual-gap">
+        <article class="split-pane split-pane--bad">
+          <div class="split-media placeholder-box" data-slot="visual-global">
+            <span class="ph-tag">Placeholder · Fig. 2 左</span>
+            <p>标准全局 / 第三人称视角<br /><small>（VLM 预训练常见分布）</small></p>
+          </div>
+          <div class="split-caption">
+            <h3>Visual Grounding Mismatch</h3>
+            <p>Global or main-view observations: regular projection, stable layout, globally visible spatial cues.</p>
+          </div>
+        </article>
+        <article class="split-pane split-pane--good">
+          <div class="split-media placeholder-box fisheye-preview" data-slot="visual-fisheye">
+            <span class="ph-tag">Placeholder · Fig. 2 右</span>
+            <p>手腕鱼眼 · 155° FOV<br /><small>径向畸变 · 夹爪遮挡 · 局部视角</small></p>
+          </div>
+          <div class="split-caption">
+            <h3>Wrist-Mounted Fisheye (UMI)</h3>
+            <p>Gripper-centric, severe radial distortion, non-uniform resolution—OOD for VLM pretraining and VLA co-training.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- 物理鸿沟：全宽对比滑块 -->
+      <div class="physical-gap-block" id="physical-gap">
+        <div class="container-wide">
+          <h3 class="subsection-title center">Physical Plausibility Mismatch</h3>
+          <p class="subsection-desc center">Raw UMI trajectories vs. physically validated trajectories on target embodiments</p>
+        </div>
+        <div class="compare-slider" id="compare-slider" aria-label="失败与成功轨迹对比">
+          <div class="compare-inner">
+            <div class="compare-layer compare-layer--before">
+              <!--
+                【对比滑块 · 左侧】Dataset 1 / 低分轨迹失败部署
+                - 内容：机器人在工作空间边缘卡死、IK 失败、自碰撞或追踪误差过大
+                - 参考论文 Fig. 6–7 Dataset 1
+                - 格式：MP4 或 WebP 动图，建议 1280×720
+              -->
+              <div class="placeholder-box compare-ph" data-slot="phys-fail">
+                <span class="ph-tag">待上传 · 低分轨迹失败</span>
+                <p>Score &lt; 60 · 部署失败<br /><small>工作空间受限 / 不可达姿态</small></p>
+              </div>
+              <span class="compare-label compare-label--left">Raw / Low Score</span>
+            </div>
+            <div class="compare-layer compare-layer--after">
+              <!--
+                【对比滑块 · 右侧】Dataset 2 / 高分轨迹成功
+                - 内容：同一任务类型下验证通过后的流畅执行
+                - 参考论文 Fig. 6–7 Dataset 2
+              -->
+              <div class="placeholder-box compare-ph" data-slot="phys-success">
+                <span class="ph-tag">待上传 · 高分轨迹成功</span>
+                <p>Score ≥ 60 · 部署成功<br /><small>经过 Mink 仿真验证保留</small></p>
+              </div>
+              <span class="compare-label compare-label--right">Validated / High Score</span>
+            </div>
+            <input type="range" min="0" max="100" value="50" class="compare-range" id="compare-range" aria-label="拖动对比" />
+            <div class="compare-handle" id="compare-handle" aria-hidden="true">
+              <span>◀ ▶</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 鱼眼过渡带 -->
+    <div class="fisheye-transition" aria-hidden="true">
+      <div class="fisheye-ring"></div>
+    </div>
+
+    <!-- ========== METHOD ========== -->
+    <section class="section section-method" id="method">
+      <div class="method-hero-screen">
+        <div class="container-wide">
+          <h2 class="section-title center">The UMI-π Framework</h2>
+          <p class="section-subtitle center">Perception alignment · Physical validation · Two-stage co-training</p>
+        </div>
+        <div class="fig-placeholder fig-architecture" data-slot="fig1-architecture">
+          <!-- 替换为论文 Fig. 1 架构图：assets/images/fig1_framework.png -->
+          <span class="ph-tag">Fig. 1 · System Overview</span>
+          <p>UMI-VQA → Physical Validation → Two-Stage Training → Deployment</p>
+          <p class="ph-small">Executable Data Validation · Mink Replay · Flow-Matching Action Expert</p>
+        </div>
+      </div>
+
+      <!-- 3.2 UMI-VQA -->
+      <div class="method-screen" id="method-vqa">
+        <div class="method-screen-inner">
+          <span class="method-index">01</span>
+          <h3>UMI-VQA · Perception Alignment</h3>
+          <p class="method-lead">8M wrist-fisheye vision-language samples aligning the VLM to gripper-centric distorted observations.</p>
+          <ul class="method-bullets">
+            <li>Five capability subsets: scene captioning, scene-state understanding, object grounding, interaction grounding, spatial reasoning</li>
+            <li>Real UMI demonstration frames + RefSpatial scenes edited via FLUX.2-klein for fisheye domain adaptation</li>
+            <li>Q&amp;A grounded in observable wrist-fisheye evidence: bboxes, affordances, spatial relations</li>
+          </ul>
+          <div class="method-visual placeholder-box" data-slot="fig3-vqa">
+            <span class="ph-tag">Fig. 3 · UMI-VQA Examples</span>
+            <p>代表性 Q&amp;A 标注拼图（物体定位 / 场景理解 / 交互区域）</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.4 Physical Validation -->
+      <div class="method-screen method-screen--alt" id="method-physics">
+        <div class="method-screen-inner">
+          <span class="method-index">02</span>
+          <h3>Physical Validation</h3>
+          <p class="method-lead">Cross-embodiment trajectory replay in Mink: filter before training, keep score s<sub>dc</sub> = s<sub>tc</sub>·s<sub>sr</sub>·s<sub>te</sub>/10000 ≥ 60.</p>
+          <ul class="method-bullets">
+            <li><strong>Trajectory continuity</strong> — consecutive waypoint distance (position &amp; angle)</li>
+            <li><strong>Self-collision risk</strong> — minimum link-link distance during replay</li>
+            <li><strong>Tracking feasibility</strong> — end-effector tracking error &amp; implicit workspace limits</li>
+          </ul>
+          <div class="method-visual placeholder-box" data-slot="fig4-validation">
+            <span class="ph-tag">Fig. 4 · Validation Flowchart</span>
+            <p>Raw UMI → Mink Replay (RealMan / AC one / R1 Pro) → Keep / Filter</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3.3 Training -->
+      <div class="method-screen" id="method-training">
+        <div class="method-screen-inner">
+          <span class="method-index">03</span>
+          <h3>Two-Stage Co-Training</h3>
+          <p class="method-lead">Stage 1: mixed VQA + FAST discrete action tokens (L = L<sub>act</sub> + λ<sub>vqa</sub>L<sub>vqa</sub>). Stage 2: knowledge-isolated flow-matching action expert on validated trajectories.</p>
+          <ul class="method-bullets">
+            <li>Stage 1 aligns perception and action-token prediction under wrist-fisheye observations</li>
+            <li>Stage 2 trains continuous action chunks without overwriting Stage-1 representations</li>
+          </ul>
+          <div class="method-visual placeholder-box" data-slot="training-diagram">
+            <span class="ph-tag">Training Pipeline Diagram</span>
+            <p>Stage 1 AR · Stage 2 Flow Matching（可选动画）</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== RESULTS ========== -->
+    <section class="section section-results" id="results">
+      <div class="container-wide">
+        <h2 class="section-title center">Real-World Deployments &amp; Results</h2>
+        <p class="section-subtitle center">20 manipulation tasks · RoboTwin-UMI &amp; LIBERO-UMI benchmarks</p>
+      </div>
+
+      <!-- Teaser 区块（Method 与 Results 之间的 climax） -->
+      <div class="results-teaser placeholder-box" data-slot="results-teaser">
+        <!--
+          【Results 主视频】
+          - 可与 Hero 不同：侧重单任务完整 uncut rollout（如折衣、收桌、高精度对齐）
+          - 15–30 秒，手腕双视角画中画或左右分屏
+        -->
+        <span class="ph-tag">待上传 · Deployment Highlight Reel</span>
+        <p>完整自主执行片段（ uncut policy rollout ）</p>
+        <p class="ph-small">建议：长视野任务 + 接触丰富任务各一段</p>
+      </div>
+
+      <!-- 横向滚动 GIF 墙 -->
+      <div class="results-scroll-wrap">
+        <p class="scroll-hint">← 拖动浏览真机任务演示 →</p>
+        <div class="results-scroll" id="results-scroll" tabindex="0">
+          <!-- 每个卡片：任务名 + GIF/MP4，共建议 9–12 个 -->
+          <article class="result-card" data-task="pick-place">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">Pick &amp; Place</p>
+          </article>
+          <article class="result-card" data-task="precision-align">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">Precision Alignment</p>
+          </article>
+          <article class="result-card" data-task="long-horizon">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">Long-Horizon</p>
+          </article>
+          <article class="result-card" data-task="contact-rich">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">Contact-Rich</p>
+          </article>
+          <article class="result-card" data-task="bimanual">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">Bimanual Coordination</p>
+          </article>
+          <article class="result-card" data-task="realman">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">RealMan</p>
+          </article>
+          <article class="result-card" data-task="acone">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">AC one</p>
+          </article>
+          <article class="result-card" data-task="r1pro">
+            <div class="result-media placeholder-box"><span class="ph-mini">GIF</span></div>
+            <p class="result-name">R1 Pro</p>
+          </article>
+          <article class="result-card" data-task="more">
+            <div class="result-media placeholder-box"><span class="ph-mini">+</span></div>
+            <p class="result-name">More Tasks…</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- 关键数字 headline -->
+      <div class="stat-banner">
+        <div class="stat-item">
+          <span class="stat-value">8M</span>
+          <span class="stat-label">UMI-VQA samples</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">100k+</span>
+          <span class="stat-label">Validated trajectories</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">20</span>
+          <span class="stat-label">Real-world tasks</span>
+        </div>
+        <div class="stat-item stat-item--highlight">
+          <span class="stat-value">ρ ↑</span>
+          <span class="stat-label">Validation score ↔ deployment success</span>
+        </div>
+      </div>
+
+      <!-- Fig.5 直方图占位 -->
+      <div class="container-wide">
+        <div class="fig-placeholder fig-chart" data-slot="fig5-histogram">
+          <span class="ph-tag">Fig. 5 · Score vs. Success Rate</span>
+          <p>低分轨迹子集 vs. 高分轨迹子集成功率对比直方图</p>
+        </div>
+      </div>
+
+      <!-- 仿真表格（可折叠） -->
+      <div class="container-narrow benchmarks-block">
+        <button class="benchmarks-toggle" id="benchmarks-toggle" aria-expanded="false" aria-controls="benchmarks-panel">
+          <span>View simulation benchmarks</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div id="benchmarks-panel" class="benchmarks-panel" hidden>
+          <div class="table-wrap">
+            <table class="bench-table">
+              <thead>
+                <tr>
+                  <th>Benchmark</th>
+                  <th>UMI-π</th>
+                  <th>π<sub>0.5</sub></th>
+                  <th>LingBot</th>
+                  <th>Wall-X</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>RoboTwin-UMI</td>
+                  <td class="best">TBD</td>
+                  <td>TBD</td>
+                  <td>TBD</td>
+                  <td>TBD</td>
+                </tr>
+                <tr>
+                  <td>LIBERO-UMI</td>
+                  <td class="best">TBD</td>
+                  <td>TBD</td>
+                  <td>TBD</td>
+                  <td>TBD</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">数值待论文定稿后填入 · 均为 UMI-style 手腕鱼眼观测设定</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== OPEN SOURCE ========== -->
+    <section class="section section-opensource" id="opensource">
+      <div class="container-wide">
+        <h2 class="section-title center">Open Source Release</h2>
+        <div class="resource-grid">
+          <a class="resource-card" href="#" id="res-vqa">
+            <span class="resource-icon">◈</span>
+            <h3>UMI-VQA Dataset</h3>
+            <p>8M wrist-fisheye vision-language samples across five capability subsets.</p>
+            <span class="resource-badge">Coming soon</span>
+          </a>
+          <a class="resource-card" href="#" id="res-traj">
+            <span class="resource-icon">◎</span>
+            <h3>Physically Validated Trajectories</h3>
+            <p>~100k real-world UMI paths scored and filtered via cross-embodiment Mink replay.</p>
+            <span class="resource-badge">Coming soon</span>
+          </a>
+          <a class="resource-card" href="#" id="res-models">
+            <span class="resource-icon">◇</span>
+            <h3>Pre-trained VLA &amp; Pipeline</h3>
+            <p>UMI-π checkpoints, validation tooling, and two-stage training code.</p>
+            <span class="resource-badge">Coming soon</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CITATION ========== -->
+    <section class="section section-citation" id="citation">
+      <div class="container-narrow">
+        <h2 class="section-title">Citation</h2>
+        <div class="bibtex-box">
+          <pre id="bibtex-content"><code>@article{yang2026umipi,
+  title={From Handheld to Deployable: Aligning Perception and Physics for {UMI}-Style {VLA} Training},
+  author={Yang, Siyuan and Guo, Linzheng and Lu, Ouyang and Zhang, Daoran and Wang, Xinmiao and Xiao, Ting and Yan, Fangzheng and Chen, Zhijun and Ding, Yan and Yu, Chao and Bai, Chenjia and Li, Xuelong},
+  journal={arXiv preprint},
+  year={2026},
+}</code></pre>
+          <button type="button" class="btn btn-copy" id="copy-bibtex">Copy BibTeX</button>
+        </div>
+
+        <h3 class="ack-title">Acknowledgments</h3>
+        <p class="ack-text">
+          We thank the UMI and FastUMI communities, Lumos Robotics for hardware support, and open-source projects including
+          <a href="https://github.com/real-stanford/universal_manipulation_interface" target="_blank" rel="noopener">UMI</a>,
+          FastUMI, Qwen-VL, Mink, and RoboTwin that made this work possible.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 UMI-π · TeleAI &amp; Lumos Robotics</p>
+    <p class="footer-note">Template inspired by <a href="https://rhodes-team-prts.github.io/" target="_blank" rel="noopener">PRTS</a> · Videos: placeholders</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
