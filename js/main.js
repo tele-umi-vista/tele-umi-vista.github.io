@@ -136,8 +136,9 @@
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute("id");
           navAnchors.forEach((a) => {
-            a.style.color =
-              a.getAttribute("href") === "#" + id ? "var(--text)" : "";
+            const active = a.getAttribute("href") === "#" + id;
+            a.style.color = active ? "var(--text)" : "";
+            a.style.fontWeight = active ? "600" : "";
           });
         }
       });
