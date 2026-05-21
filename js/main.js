@@ -113,6 +113,21 @@
 
   /* ── Horizontal scroll: wheel → horizontal on results strip ── */
   const resultsScroll = document.getElementById("results-scroll");
+  const previewVideos = document.querySelectorAll(".result-media");
+  const modal = document.getElementById("video-modal");
+  const modalTitle = document.getElementById("video-modal-title");
+  const modalPlayer = document.getElementById("video-modal-player");
+  const modalClose = document.getElementById("video-modal-close");
+  const modalOpenButtons = document.querySelectorAll("[data-modal-video]");
+
+  previewVideos.forEach((video) => {
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.play().catch(() => {});
+  });
+
   if (resultsScroll) {
     resultsScroll.addEventListener(
       "wheel",
@@ -125,6 +140,52 @@
       { passive: false }
     );
   }
+
+  function closeVideoModal() {
+    if (!modal || !modalPlayer) return;
+    modal.hidden = true;
+    modalPlayer.pause();
+    modalPlayer.removeAttribute("src");
+    modalPlayer.load();
+    document.body.style.overflow = "";
+  }
+
+  function openVideoModal(src, title) {
+    if (!modal || !modalPlayer || !modalTitle) return;
+    modalTitle.textContent = title || "Task Video";
+    modal.hidden = false;
+    modalPlayer.src = src;
+    modalPlayer.currentTime = 0;
+    modalPlayer.play().catch(() => {});
+    document.body.style.overflow = "hidden";
+  }
+
+  modalOpenButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const src = btn.getAttribute("data-modal-video");
+      const title = btn.getAttribute("data-modal-title");
+      if (!src) return;
+      openVideoModal(src, title);
+    });
+  });
+
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target instanceof HTMLElement && e.target.hasAttribute("data-close-video-modal")) {
+        closeVideoModal();
+      }
+    });
+  }
+
+  if (modalClose) {
+    modalClose.addEventListener("click", closeVideoModal);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal && !modal.hidden) {
+      closeVideoModal();
+    }
+  });
 
   /* ── Active nav highlight ── */
   const sections = document.querySelectorAll("section[id]");
