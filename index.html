@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous" />
 </head>
 <body>
   <!-- 顶栏：滚动后由透明变为实色 -->
@@ -114,75 +115,91 @@
 
     <!-- ========== THE DUAL GAP ========== -->
     <section class="section section-dual-gap" id="dual-gap">
-      <div class="container-wide">
-        <!-- <h2 class="section-title center">The Dual Gap</h2>
-        <p class="section-subtitle center">Why raw UMI data breaks standard VLA training</p> -->
-
+      <div class="container-wide dual-gap-header">
         <h2 class="section-title center">Why raw UMI data breaks standard VLA training?</h2>
       </div>
 
-      <!-- 视觉鸿沟：分屏对比 -->
-      <div class="split-compare" id="visual-gap">
-        <article class="split-pane split-pane--bad">
-          <div class="split-media placeholder-box" data-slot="visual-global">
-            <span class="ph-tag">Placeholder · Fig. 2 左</span>
-            <p>标准全局 / 第三人称视角<br /><small>（VLM 预训练常见分布）</small></p>
+      <!-- 1. Visual grounding / OOD -->
+      <div class="gap-point gap-point--visual" id="visual-gap">
+        <div class="container-wide gap-point-inner">
+          <span class="gap-index">01</span>
+          <h3 class="gap-point-title">Visual Grounding Mismatch</h3>
+          <p class="gap-lead">
+            Standard VLA and VLM pipelines are built on relatively global, pinhole-perspective supervision. UMI instead records wrist-mounted fisheye views that are local, gripper-centric, and visually far from this pretraining regime.
+          </p>
+        </div>
+
+        <div class="view-compare-grid container-wide">
+          <article class="view-compare-card view-compare-card--main">
+            <p class="view-compare-label">VLM visual grounding</p>
+            <div class="view-compare-media" data-slot="visual-main">
+              <!-- 替换：assets/videos/main_view.mp4 -->
+              <video class="view-compare-video" muted loop playsinline preload="metadata" aria-label="Main view demonstration">
+                <!-- <source src="assets/videos/main_view.mp4" type="video/mp4" /> -->
+              </video>
+              <div class="view-compare-placeholder placeholder-box">
+                <span class="ph-tag">Video · Main view</span>
+                <p class="ph-small">待上传 · 主视角 / 第三人称</p>
+              </div>
+            </div>
+            <ul class="view-compare-points">
+              <li>Pinhole projection</li>
+              <li>Global spatial cues</li>
+              <p>✅ Matches VLM pretraining</p>
+
+            </ul>
+          </article>
+
+          <article class="view-compare-card view-compare-card--fisheye">
+            <p class="view-compare-label">Fisheye view in UMI</p>
+            <div class="view-compare-media fisheye-preview" data-slot="visual-fisheye">
+              <!-- 替换：assets/videos/fisheye_view.mp4 -->
+              <video class="view-compare-video" muted loop playsinline preload="metadata" aria-label="UMI wrist fisheye demonstration">
+                <!-- <source src="assets/videos/fisheye_view.mp4" type="video/mp4" /> -->
+              </video>
+              <div class="view-compare-placeholder placeholder-box">
+                <span class="ph-tag">Video · Fisheye</span>
+                <p class="ph-small">待上传 · 手腕鱼眼 · 155° FOV</p>
+              </div>
+            </div>
+            <ul class="view-compare-points">
+              <li>Wrist-mounted gripper-centric (~155° FOV)</li>
+              <li>Severe radial distortion</li>
+              <li>Frequent gripper / arm self-occlusion</li>
+            </ul>
+            <p class="view-compare-ood">❌ Out-of-distribution for standard VLMs</p>
+          </article>
+        </div>
+
+        <div class="gap-chart-row container-wide">
+          <div class="gap-chart-copy">
+            <p class="gap-chart-title">Perception degradation under fisheye observations</p>
+            <p class="gap-chart-desc">
+              We evaluate general and robot-specialized VLMs on four spatial / robot-centric VQA benchmarks using the same questions on original resized images (blue) versus fisheye-transformed images (orange). Every model shows a consistent score drop (2.4–6.0 percentage points), indicating that fisheye wrist views are out-of-distribution for current VLM visual representations and degrade grounding before policy learning even begins.
+            </p>
           </div>
-          <div class="split-caption">
-            <h3>Visual Grounding Mismatch</h3>
-            <p>Global or main-view observations: regular projection, stable layout, globally visible spatial cues.</p>
-          </div>
-        </article>
-        <article class="split-pane split-pane--good">
-          <div class="split-media placeholder-box fisheye-preview" data-slot="visual-fisheye">
-            <span class="ph-tag">Placeholder · Fig. 2 右</span>
-            <p>手腕鱼眼 · 155° FOV<br /><small>径向畸变 · 夹爪遮挡 · 局部视角</small></p>
-          </div>
-          <div class="split-caption">
-            <h3>Wrist-Mounted Fisheye (UMI)</h3>
-            <p>Gripper-centric, severe radial distortion, non-uniform resolution—OOD for VLM pretraining and VLA co-training.</p>
-          </div>
-        </article>
+          <figure class="gap-chart-figure">
+            <img
+              src="assets/images/fisheye_ood_chart.png"
+              alt="Average VQA scores of VLMs on original versus fisheye-transformed images"
+              width="520"
+              height="246"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
       </div>
 
-      <!-- 物理鸿沟：全宽对比滑块 -->
-      <div class="physical-gap-block" id="physical-gap">
-        <div class="container-wide">
-          <h3 class="subsection-title center">Physical Plausibility Mismatch</h3>
-          <p class="subsection-desc center">Raw UMI trajectories vs. physically validated trajectories on target embodiments</p>
+      <!-- 2. Physical plausibility (videos TBD) -->
+      <div class="gap-point gap-point--physical" id="physical-gap">
+        <div class="container-wide gap-point-inner">
+          <span class="gap-index">02</span>
+          <h3 class="gap-point-title">Physical Plausibility Mismatch</h3>
         </div>
-        <div class="compare-slider" id="compare-slider" aria-label="失败与成功轨迹对比">
-          <div class="compare-inner">
-            <div class="compare-layer compare-layer--before">
-              <!--
-                【对比滑块 · 左侧】Dataset 1 / 低分轨迹失败部署
-                - 内容：机器人在工作空间边缘卡死、IK 失败、自碰撞或追踪误差过大
-                - 参考论文 Fig. 6–7 Dataset 1
-                - 格式：MP4 或 WebP 动图，建议 1280×720
-              -->
-              <div class="placeholder-box compare-ph" data-slot="phys-fail">
-                <span class="ph-tag">待上传 · 低分轨迹失败</span>
-                <p>Score &lt; 60 · 部署失败<br /><small>工作空间受限 / 不可达姿态</small></p>
-              </div>
-              <span class="compare-label compare-label--left">Raw / Low Score</span>
-            </div>
-            <div class="compare-layer compare-layer--after">
-              <!--
-                【对比滑块 · 右侧】Dataset 2 / 高分轨迹成功
-                - 内容：同一任务类型下验证通过后的流畅执行
-                - 参考论文 Fig. 6–7 Dataset 2
-              -->
-              <div class="placeholder-box compare-ph" data-slot="phys-success">
-                <span class="ph-tag">待上传 · 高分轨迹成功</span>
-                <p>Score ≥ 60 · 部署成功<br /><small>经过 Mink 仿真验证保留</small></p>
-              </div>
-              <span class="compare-label compare-label--right">Validated / High Score</span>
-            </div>
-            <input type="range" min="0" max="100" value="50" class="compare-range" id="compare-range" aria-label="拖动对比" />
-            <div class="compare-handle" id="compare-handle" aria-hidden="true">
-              <span>◀ ▶</span>
-            </div>
-          </div>
+        <div class="physical-video-grid container-wide" data-slot="phys-videos" aria-label="Physical validation videos (coming soon)">
+          <div class="physical-video-slot placeholder-box"></div>
+          <div class="physical-video-slot placeholder-box"></div>
         </div>
       </div>
     </section>
@@ -222,17 +239,17 @@
             <li>Real UMI demonstration frames + RefSpatial scenes edited via FLUX.2-klein for fisheye domain adaptation</li>
             <li>Q&amp;A grounded in observable wrist-fisheye evidence: bboxes, affordances, spatial relations</li>
           </ul>
-          <figure class="method-visual" data-slot="fig3-vqa">
-            <img
-              src="assets/images/vqa.jpg"
-              alt="UMI-VQA 8M dataset overview: real-world UMI VQA 3M pairs and spatial-diversity supplement 5M"
-              width="900"
-              height="529"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
         </div>
+        <figure class="method-visual method-visual--wide" data-slot="fig3-vqa">
+          <img
+            src="assets/images/vqa.jpg"
+            alt="UMI-VQA 8M dataset overview: real-world UMI VQA 3M pairs and spatial-diversity supplement 5M"
+            width="1200"
+            height="706"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
 
       <!-- 3.4 Physical Validation -->
@@ -240,33 +257,102 @@
         <div class="method-screen-inner">
           <span class="method-index">02</span>
           <h3>Physical Validation</h3>
-          <p class="method-lead">Cross-embodiment trajectory replay in Mink: filter before training, keep score s<sub>dc</sub> = s<sub>tc</sub>·s<sub>sr</sub>·s<sub>te</sub>/10000 ≥ 60.</p>
+          <p class="method-lead">
+            Before training, each trajectory is replayed in a cross-embodiment MuJoCo + Mink pipeline (RealMan, AC one, R1 Pro), scored along three complementary axes plus a data-completeness pre-check, and aggregated into an overall cross-embodiment score \(S(\tau, e)\) via a weighted geometric mean. Trajectories below the validation threshold are filtered out.
+          </p>
           <ul class="method-bullets">
-            <li><strong>Trajectory continuity</strong> — consecutive waypoint distance (position &amp; angle)</li>
-            <li><strong>Self-collision risk</strong> — minimum link-link distance during replay</li>
-            <li><strong>Tracking feasibility</strong> — end-effector tracking error &amp; implicit workspace limits</li>
+            <li><strong>Trajectory continuity (\(s_{\mathrm{tc}}\))</strong> — embodiment-agnostic gripper smoothness from consecutive waypoint displacement (position &amp; angle); penalizes dropout, tracking loss, or abrupt motion</li>
+            <li><strong>Self-collision risk (\(s_{\mathrm{sr}}\))</strong> — minimum link–link distance during replay on the target embodiment; hard zero below a safety margin, full score above a clearance threshold</li>
+            <li><strong>Execution fidelity (\(s_{\mathrm{ef}}\))</strong> — tracking deviation between demonstrated and replayed end-effector poses, reflecting joint limits, singularities, workspace bounds, and controller bandwidth</li>
           </ul>
-          <div class="method-visual placeholder-box" data-slot="fig4-validation">
-            <span class="ph-tag">Fig. 4 · Validation Flowchart</span>
-            <p>Raw UMI → Mink Replay (RealMan / AC one / R1 Pro) → Keep / Filter</p>
-          </div>
         </div>
+        <figure class="method-visual method-visual--wide" data-slot="fig4-validation">
+          <img
+            src="assets/images/score_system.jpg"
+            alt="Physical validation scoring system: trajectory continuity, self-collision risk, and tracking feasibility"
+            width="1200"
+            height="675"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
 
-      <!-- 3.3 Training -->
-      <div class="method-screen" id="method-training">
-        <div class="method-screen-inner">
-          <span class="method-index">03</span>
-          <h3>Two-Stage Co-Training</h3>
-          <p class="method-lead">Stage 1: mixed VQA + FAST discrete action tokens (L = L<sub>act</sub> + λ<sub>vqa</sub>L<sub>vqa</sub>). Stage 2: knowledge-isolated flow-matching action expert on validated trajectories.</p>
-          <ul class="method-bullets">
-            <li>Stage 1 aligns perception and action-token prediction under wrist-fisheye observations</li>
-            <li>Stage 2 trains continuous action chunks without overwriting Stage-1 representations</li>
-          </ul>
-          <div class="method-visual placeholder-box" data-slot="training-diagram">
-            <span class="ph-tag">Training Pipeline Diagram</span>
-            <p>Stage 1 AR · Stage 2 Flow Matching（可选动画）</p>
+      <!-- 3.4 Model Training & Deployment -->
+      <div class="method-screen method-screen--training" id="method-training">
+        <div class="training-layout container-wide">
+          <div class="training-intro">
+            <span class="method-index">03</span>
+            <h3>Two-Stage Co-Training</h3>
+            <p class="method-lead training-lead">
+              UMI-π is pre-trained on 8M UMI-VQA samples and ~100k physically validated UMI trajectories. Because the pre-training objective is to learn embodiment-agnostic manipulation priors, trajectories are curated with a lenient physical-validation threshold that keeps broadly feasible demonstrations while filtering severely defective ones.
+            </p>
+            <p class="training-lead-extra">
+              Pre-training then proceeds in two stages: first, autoregressive co-training on VQA and discretized actions to align the VLM backbone with the wrist-fisheye regime; second, continuous-action refinement via a knowledge-isolated flow-matching expert.
+            </p>
           </div>
+
+          <div class="training-stages-col">
+            <article class="training-stage">
+              <span class="training-stage-label">Stage 1</span>
+              <h4 class="training-stage-title">Mixed VQA–Action Autoregressive Training</h4>
+              <p class="training-stage-desc">
+                The VLA backbone is trained with a mixed objective over action prediction and VQA generation. Continuous action chunks are converted to FAST discrete tokens; UMI-VQA provides parallel supervision on the same fisheye observations.
+              </p>
+              <p class="training-formula">\( \mathcal{L}_{\mathrm{stage1}} = \mathcal{L}_{\mathrm{act\text{-}token}} + \lambda_{\mathrm{vqa}}\mathcal{L}_{\mathrm{vqa}} \)</p>
+              <ul class="training-points">
+                <li>Autoregressive action-token prediction from \(o_t\), instruction \(\ell\), and state \(s_t\)</li>
+                <li>Cross-entropy VQA loss for perception-aligned visual reasoning</li>
+                <li>Jointly aligns wrist-fisheye perception and discrete action interfaces</li>
+              </ul>
+            </article>
+
+            <article class="training-stage">
+              <span class="training-stage-label">Stage 2</span>
+              <h4 class="training-stage-title">Knowledge-Isolated Flow-Matching Expert</h4>
+              <p class="training-stage-desc">
+                Continuous control benefits from a richer action generator. Following a knowledge-isolation strategy, the pretrained VLA backbone is frozen while a separate flow-matching expert is trained on validated trajectories.
+              </p>
+              <p class="training-formula">\( \mathcal{L}_{\mathrm{fm}} = \mathbb{E}_{a,\epsilon,\tau}\big[\| f_\phi(a_\tau,\tau,h_\theta) - (a-\epsilon) \|_2^2 \big] \)</p>
+              <ul class="training-points">
+                <li>Conditioned on frozen representations \(h_\theta(o_t,\ell,s_t)\)</li>
+                <li>Learns continuous action chunks via flow matching</li>
+                <li>Avoids catastrophic forgetting of Stage-1 perception knowledge</li>
+              </ul>
+            </article>
+
+            <article class="training-stage training-stage--finetune">
+              <span class="training-stage-label">Fine-tuning</span>
+              <h4 class="training-stage-title">Downstream Task-Specific Adaptation</h4>
+              <p class="training-stage-desc">
+                After pre-training, UMI-π is adapted to downstream tasks and target embodiments. Task data for the deployment robot is re-filtered with a <strong>strict</strong> physical-validation threshold, removing trajectories with kinematic violations, collision risks, or poor tracking fidelity.
+              </p>
+              <ul class="training-points">
+                <li>VLA backbone remains frozen during adaptation</li>
+                <li>Only the flow-matching action expert is updated</li>
+                <li>Preserves generalist visual-linguistic knowledge while specializing control</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="training-deploy" id="deployment">
+          <div class="container-wide training-deploy-copy">
+            <h4 class="training-deploy-title">Multi-robot deployment System</h4>
+            <p class="training-deploy-desc">
+              To exploit cross-embodiment deployment, we build a pure Python distributed stack for heterogeneous arms. Zenoh serves as the communication middleware, supporting zero-copy shared memory or pub/sub across processes, LANs, and WANs. State streams from multiple robots are batched on distributed GPU nodes; predicted action chunks are temporally ensembled and routed back through synchronous RPC for strict temporal alignment. The design avoids heavy ROS dependencies and supports new arms that meet the UMI end-effector mounting specification.
+            </p>
+          </div>
+          <figure class="training-deploy-figure">
+            <img
+              src="assets/images/multi2multi.jpg"
+              alt="Multi-robot deployment system: Zenoh middleware connecting host and satellite GPU nodes to heterogeneous robot arms"
+              width="1200"
+              height="495"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </div>
       </div>
     </section>
@@ -523,7 +609,7 @@
 
     <!-- ========== CITATION ========== -->
     <section class="section section-citation" id="citation">
-      <div class="container-narrow">
+      <div class="container-wide">
         <h2 class="section-title">Citation</h2>
         <div class="bibtex-box">
           <pre id="bibtex-content"><code>@article{yang2026umipi,
@@ -535,21 +621,35 @@
           <button type="button" class="btn btn-copy" id="copy-bibtex">Copy BibTeX</button>
         </div>
 
-        <h3 class="ack-title">Acknowledgments</h3>
-        <p class="ack-text">
-          We thank the UMI and FastUMI communities, Lumos Robotics for hardware support, and open-source projects including
-          <a href="https://github.com/real-stanford/universal_manipulation_interface" target="_blank" rel="noopener">UMI</a>,
-          FastUMI, Qwen-VL, Mink, and RoboTwin that made this work possible.
-        </p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 UMI-π · TeleAI &amp; Lumos Robotics</p>
-    <p class="footer-note">Template inspired by <a href="https://rhodes-team-prts.github.io/" target="_blank" rel="noopener">PRTS</a> · Videos: placeholders</p>
+    <div class="footer-logos">
+      <img
+        src="assets/images/teleai_logo.png"
+        alt="Institute of Artificial Intelligence, China Telecom (TeleAI)"
+        class="footer-logo footer-logo--teleai"
+        height="48"
+        width="265"
+        loading="lazy"
+        decoding="async"
+      />
+      <img
+        src="assets/images/logoLumos.png"
+        alt="Lumos Robotics"
+        class="footer-logo footer-logo--lumos"
+        height="85"
+        width="85"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+    <p>© 2026 Institute of Artificial Intelligence of China Telecom (TeleAI) &amp; Lumos Robotics. All rights reserved.</p>
   </footer>
 
-  <script src="js/main.js"></script>
-</body>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+  <script defer src="js/main.js"></script>
 </html>

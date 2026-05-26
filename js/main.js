@@ -97,6 +97,26 @@
 
   checkHeroVideo();
 
+  /* ── View compare: hide placeholder when video has source ── */
+  function checkViewCompareVideos() {
+    document.querySelectorAll(".view-compare-media").forEach((wrap) => {
+      const video = wrap.querySelector(".view-compare-video");
+      const source = video?.querySelector("source");
+      const hasSrc =
+        (video?.getAttribute("src") && video.getAttribute("src") !== "") ||
+        (source?.getAttribute("src") && source.getAttribute("src") !== "");
+      if (hasSrc && video) {
+        wrap.classList.add("has-video");
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.play().catch(() => {});
+      }
+    });
+  }
+
+  checkViewCompareVideos();
+
   /* ── Smooth scroll offset for fixed header ── */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
@@ -208,6 +228,24 @@
   );
 
   sections.forEach((s) => observer.observe(s));
+
+  /* ── KaTeX: inline math \( ... \) and display math \[ ... \] ── */
+  function renderMath() {
+    if (typeof renderMathInElement !== "function") return;
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true },
+      ],
+      throwOnError: false,
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderMath);
+  } else {
+    renderMath();
+  }
 
   /* Placeholder links — update when URLs are ready */
   const TODO = "#";
