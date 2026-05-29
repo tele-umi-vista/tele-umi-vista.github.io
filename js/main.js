@@ -117,6 +117,13 @@
 
   checkViewCompareVideos();
 
+  document.querySelectorAll(".physical-vali-video").forEach((video) => {
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.play().catch(() => {});
+  });
+
   /* ── Smooth scroll offset for fixed header ── */
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {

@@ -209,13 +209,65 @@
           <p class="gap-lead">
             To visually demonstrate this issue, we analyzed the execution of three representative tasks. Unconstrained trajectories often suffer from severe tracking errors. The curves below compare the position and orientation deviations between successful and failed trajectories, showing exactly how these physical limits disrupt the task.
           </p>
-          <p class="gap-lead">
-            这里会放三个 task 的视频
-          </p>
         </div>
-        <div class="physical-video-grid container-wide" data-slot="phys-videos" aria-label="Physical validation videos (coming soon)">
-          <div class="physical-video-slot placeholder-box"></div>
-          <div class="physical-video-slot placeholder-box"></div>
+        <div class="physical-vali-block container-wide" aria-label="Physical validation trajectory comparisons">
+          <div class="physical-vali-legend">
+            <div class="physical-vali-legend-item">
+              <span class="physical-vali-legend-line physical-vali-legend-line--failed" aria-hidden="true"></span>
+              <span>Success trajectory</span>
+            </div>
+            <div class="physical-vali-legend-item">
+              <span class="physical-vali-legend-line physical-vali-legend-line--success" aria-hidden="true"></span>
+              <span>Failed trajectory</span>
+            </div>
+          </div>
+          <div class="physical-vali-stack">
+            <figure class="physical-vali-item">
+              <figcaption class="physical-vali-caption">Glue stick handover</figcaption>
+              <div class="physical-vali-media">
+                <video
+                  class="physical-vali-video"
+                  src="assets/videos/motiv_vali/umi-pi_vali_handover_crop.mp4"
+                  muted
+                  loop
+                  playsinline
+                  autoplay
+                  preload="metadata"
+                  aria-label="Glue stick handover: failed vs success trajectory deviation"
+                ></video>
+              </div>
+            </figure>
+            <figure class="physical-vali-item">
+              <figcaption class="physical-vali-caption">Drawer pulling</figcaption>
+              <div class="physical-vali-media">
+                <video
+                  class="physical-vali-video"
+                  src="assets/videos/motiv_vali/umi-pi_vali_drawer_crop.mp4"
+                  muted
+                  loop
+                  playsinline
+                  autoplay
+                  preload="metadata"
+                  aria-label="Drawer pulling: failed vs success trajectory deviation"
+                ></video>
+              </div>
+            </figure>
+            <figure class="physical-vali-item">
+              <figcaption class="physical-vali-caption">Stapler placement</figcaption>
+              <div class="physical-vali-media">
+                <video
+                  class="physical-vali-video"
+                  src="assets/videos/motiv_vali/umi-pi_vali_shelf_crop.mp4"
+                  muted
+                  loop
+                  playsinline
+                  autoplay
+                  preload="metadata"
+                  aria-label="Stapler placement: failed vs success trajectory deviation"
+                ></video>
+              </div>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
