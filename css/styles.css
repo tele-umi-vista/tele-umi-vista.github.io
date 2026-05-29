@@ -1851,3 +1851,904 @@ video {
     width: 100%;
   }
 }
+
+/* Project-page refinement: keep the original paper narrative single-column.
+   Only the 20 deployment videos are allowed to use a grid layout. */
+.container-abstract,
+.container-wide,
+.container-narrow {
+  max-width: 1040px;
+}
+
+.section {
+  padding: 4.75rem 0;
+}
+
+.section-title {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.paper-title {
+  max-width: 1040px;
+  width: auto;
+}
+
+.view-compare-grid,
+.gap-chart-row,
+.physical-video-grid,
+.training-layout,
+.training-deploy,
+.resource-grid,
+.stat-banner {
+  display: flex;
+  flex-direction: column;
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.view-compare-card,
+.feature-panel,
+.training-stage,
+.resource-card,
+.stat-item {
+  width: 100%;
+}
+
+.view-compare-media,
+.results-teaser,
+.method-visual,
+.fig-architecture,
+.training-deploy-figure,
+.gap-chart-figure {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.gap-chart-copy {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.gap-chart-title,
+.gap-chart-desc {
+  text-align: left;
+}
+
+.gap-chart-figure,
+.method-visual,
+.fig-architecture,
+.training-deploy-figure {
+  width: min(1040px, calc(100vw - 3rem));
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: var(--shadow-md);
+}
+
+.gap-chart-figure img,
+.method-visual img,
+.fig-architecture img,
+.training-deploy-figure img {
+  width: 100%;
+  height: auto;
+  image-rendering: auto;
+}
+
+.method-screen {
+  display: block;
+  min-height: auto;
+  padding: 4.5rem 0;
+}
+
+.method-screen-inner,
+.training-intro,
+.training-deploy-copy {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.method-bullets {
+  margin-bottom: 2rem;
+}
+
+.training-stages-col {
+  width: min(920px, calc(100vw - 3rem));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.training-deploy-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stat-banner {
+  gap: 0;
+}
+
+.stat-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-item:last-child {
+  border-bottom: 0;
+}
+
+.section-results .stat-banner {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  width: min(var(--paper-content-width), calc(100vw - 3rem));
+  max-width: var(--paper-content-width);
+  margin: 4rem auto 3rem;
+  padding: 1.8rem 0;
+  background: rgba(255, 255, 255, 0.58);
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.section-results .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 8.5rem;
+  padding: 0 1.5rem;
+  border-right: 1px solid rgba(15, 23, 42, 0.12);
+  border-bottom: 0;
+  background: transparent;
+}
+
+.section-results .stat-item:last-child {
+  border-right: 0;
+}
+
+.section-results .stat-value {
+  font-size: clamp(2.35rem, 4.4vw, 4rem);
+  line-height: 1;
+  letter-spacing: 0;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.section-results .stat-item--highlight .stat-value {
+  color: var(--accent);
+}
+
+.section-results .stat-label {
+  max-width: 12rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.section-citation .bibtex-box {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.section-citation .bibtex-box pre,
+.section-citation .bibtex-box pre code {
+  color: #334155;
+}
+
+.section-citation .btn-copy {
+  display: flex;
+  width: fit-content;
+  margin: 1.25rem auto 0;
+}
+
+.section-abstract .section-label {
+  color: var(--text);
+  font-size: var(--paper-section-title-size);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 1.25rem;
+}
+
+.method-hero-screen {
+  min-height: auto;
+  justify-content: flex-start;
+  padding: 2.75rem 0 5rem;
+}
+
+.section-method .section-title {
+  margin-top: 0;
+}
+
+.physical-video-grid {
+  margin-top: 2rem;
+}
+
+#physical-gap .physical-video-grid {
+  display: none;
+}
+
+#physical-gap {
+  padding-bottom: 2rem;
+}
+
+.section-dual-gap {
+  padding-bottom: 0;
+}
+
+#physical-gap .gap-point-inner {
+  padding-top: 0.5rem;
+}
+
+#physical-gap .gap-point-title {
+  margin-bottom: 1.75rem;
+}
+
+#physical-gap .gap-lead {
+  margin-bottom: 1.4rem;
+}
+
+#physical-gap .gap-lead:last-child {
+  margin-bottom: 0;
+}
+
+.section-method .fig-architecture {
+  margin-top: 2.25rem;
+}
+
+.method-hero-body {
+  margin-top: 2.25rem;
+}
+
+.method-screen-inner,
+.method-screen h3 {
+  text-align: left;
+}
+
+.method-lead--follow {
+  margin-top: 1.25rem;
+}
+
+/* Paper heading block: wider, clearer, and readable as the formal paper title. */
+.paper-intro {
+  padding: 3.25rem 0 3.5rem;
+}
+
+.paper-intro-inner {
+  width: min(1320px, calc(100vw - 3rem));
+  max-width: 1320px;
+}
+
+.paper-title {
+  width: 100%;
+  max-width: 1320px;
+  left: auto;
+  transform: none;
+  margin: 0 auto 1.6rem;
+  font-size: clamp(2.85rem, 2.75vw, 3.05rem);
+  line-height: 1.13;
+  letter-spacing: 0;
+}
+
+.paper-title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.paper-authors {
+  max-width: 1120px;
+  margin: 0 auto 0.8rem;
+  font-size: 1.12rem;
+  line-height: 1.78;
+}
+
+.author-line {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.45rem 0.6rem;
+  white-space: nowrap;
+}
+
+.author-line + .author-line {
+  margin-top: 0.15rem;
+}
+
+.author {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.paper-affiliations {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.aff-note {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .paper-title {
+    font-size: clamp(2.25rem, 7vw, 3rem);
+  }
+
+  .paper-title span {
+    white-space: normal;
+  }
+
+  .author-line {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 560px) {
+  .paper-intro-inner {
+    width: calc(100vw - 2rem);
+  }
+
+  .paper-title {
+    font-size: clamp(1.9rem, 9vw, 2.35rem);
+    line-height: 1.16;
+  }
+
+  .paper-authors {
+    font-size: 1rem;
+  }
+
+  .paper-affiliations {
+    font-size: 0.92rem;
+  }
+}
+
+/* Keep method subsections aligned like the original paper narrative. */
+.section-method .method-screen-inner,
+.section-method .method-screen h3 {
+  text-align: left;
+}
+
+.resource-grid {
+  gap: 1rem;
+}
+
+.results-scroll-wrap {
+  width: min(1180px, calc(100vw - 3rem));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.results-scroll {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  overflow: visible;
+  scroll-snap-type: none;
+  padding: 0;
+}
+
+.result-card {
+  min-width: 0;
+  flex: none;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.result-media {
+  margin-bottom: 0;
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
+}
+
+.result-name {
+  min-height: 3.25rem;
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  color: var(--text);
+}
+
+.video-modal {
+  z-index: 2000;
+}
+
+.video-modal-close {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+}
+
+@media (max-width: 900px) {
+  .results-scroll {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-results .stat-banner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-results .stat-item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .section-results .stat-item:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-placeholder {
+    gap: 0;
+  }
+
+  .hero-placeholder .ph-icon {
+    transform: translateY(-7rem);
+    opacity: 0.72;
+  }
+
+  .hero-placeholder .ph-title,
+  .hero-placeholder .ph-hint {
+    display: none;
+  }
+
+  .results-scroll {
+    grid-template-columns: 1fr;
+  }
+
+  .section-results .stat-banner {
+    width: calc(100vw - 2rem);
+    padding: 1.2rem 0;
+  }
+
+  .section-results .stat-item {
+    min-height: 7rem;
+    padding: 0 0.75rem;
+  }
+
+  .section-results .stat-value {
+    font-size: 2.4rem;
+  }
+
+  .gap-chart-figure,
+  .method-visual,
+  .fig-architecture,
+  .training-deploy-figure,
+  .results-scroll-wrap {
+    width: calc(100vw - 2rem);
+  }
+}
+
+/* Academic section bands: six navigation sections, restrained and borderless. */
+.section-abstract {
+  background: #ffffff;
+}
+
+.section-dual-gap {
+  background: #f6f8fb;
+}
+
+.section-method {
+  background: #ffffff;
+}
+
+.section-results {
+  background: #f7f9fc;
+}
+
+.section-opensource {
+  background: #ffffff;
+}
+
+.section-citation {
+  background: #f6f8fb;
+}
+
+.section-title,
+.section-label,
+.subsection-title,
+.gap-point-title,
+.method-screen h3,
+.training-deploy-title,
+.ack-title {
+  text-align: center;
+}
+
+.section-subtitle,
+.dual-gap-header,
+.gap-point-inner,
+.method-screen-inner,
+.training-intro,
+.training-deploy-copy {
+  text-align: center;
+}
+
+.fisheye-transition {
+  display: none;
+}
+
+.gap-point,
+.method-screen,
+.training-deploy,
+.section-opensource,
+.site-footer {
+  border-top: 0;
+}
+
+.gap-point--physical,
+.method-screen--alt,
+.training-deploy {
+  background: transparent;
+}
+
+.placeholder-box,
+.view-compare-media,
+.gap-chart-figure,
+.physical-video-slot,
+.fig-placeholder,
+.fig-architecture,
+.method-visual,
+.training-stage,
+.training-formula,
+.training-deploy-figure,
+.results-teaser,
+.result-card,
+.result-media,
+.stat-banner,
+.stat-item,
+.benchmarks-toggle,
+.table-wrap,
+.resource-card,
+.bibtex-box {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.placeholder-box,
+.view-compare-media,
+.physical-video-slot,
+.fig-placeholder,
+.results-teaser,
+.stat-banner,
+.stat-item,
+.benchmarks-toggle,
+.table-wrap,
+.bibtex-box {
+  background: transparent;
+}
+
+.resource-card,
+.training-stage {
+  background: transparent;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.resource-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.resource-grid,
+.training-stages-col {
+  gap: 1.5rem;
+}
+
+.result-card {
+  background: transparent;
+}
+
+.result-name {
+  justify-content: center;
+  text-align: center;
+}
+
+.benchmarks-toggle {
+  border-top: 1px solid rgba(15, 23, 42, 0.14);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.14);
+}
+
+.bench-table th {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.results-teaser,
+.fig-placeholder,
+.physical-video-slot {
+  min-height: auto;
+  aspect-ratio: auto;
+  padding: 1.5rem;
+}
+
+.view-compare-media:not(.has-video) {
+  aspect-ratio: auto;
+  min-height: auto;
+}
+
+.view-compare-media:not(.has-video) .view-compare-placeholder {
+  position: static;
+  padding: 1.5rem 0;
+}
+
+.placeholder-box {
+  min-height: auto;
+}
+
+/* Unified academic reading width across all six sections. */
+:root {
+  --paper-content-width: 1040px;
+}
+
+.container-abstract,
+.container-wide,
+.container-narrow,
+.dual-gap-header,
+.gap-point-inner,
+.gap-chart-copy,
+.method-screen-inner,
+.training-layout,
+.training-intro,
+.training-stages-col,
+.training-deploy-copy,
+.benchmarks-block,
+.resource-grid,
+.bibtex-box {
+  width: min(var(--paper-content-width), calc(100vw - 3rem));
+  max-width: var(--paper-content-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-abstract,
+.container-wide,
+.container-narrow {
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section-subtitle {
+  max-width: var(--paper-content-width);
+}
+
+.prose,
+.gap-lead,
+.gap-bullets,
+.gap-chart-desc,
+.method-lead,
+.method-bullets,
+.training-lead,
+.training-lead-extra,
+.training-stage-desc,
+.training-points,
+.training-deploy-desc,
+.resource-card p,
+.ack-text,
+.bibtex-box pre,
+.table-note {
+  text-align: left;
+}
+
+.prose p,
+.gap-lead,
+.gap-chart-desc,
+.method-lead,
+.training-lead,
+.training-lead-extra,
+.training-deploy-desc,
+.ack-text {
+  width: 100%;
+  max-width: none;
+}
+
+.gap-point-inner,
+.method-screen-inner,
+.training-intro,
+.training-deploy-copy {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.method-bullets,
+.gap-bullets,
+.training-points {
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .container-abstract,
+  .container-wide,
+  .container-narrow,
+  .dual-gap-header,
+  .gap-point-inner,
+  .gap-chart-copy,
+  .method-screen-inner,
+  .training-layout,
+  .training-intro,
+  .training-stages-col,
+  .training-deploy-copy,
+  .benchmarks-block,
+  .resource-grid,
+  .bibtex-box {
+    width: calc(100vw - 2rem);
+  }
+}
+
+/* Academic typography normalization. */
+:root {
+  --paper-section-title-size: clamp(2rem, 3.2vw, 2.8rem);
+  --paper-subtitle-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  --paper-body-size: 1.05rem;
+  --paper-small-size: 0.95rem;
+}
+
+.gap-index,
+.method-index {
+  display: none;
+}
+
+.section-title {
+  font-size: var(--paper-section-title-size);
+  line-height: 1.18;
+  margin-bottom: 1.25rem;
+}
+
+.gap-point-title,
+.method-screen h3,
+.training-deploy-title,
+.resource-card h3,
+.ack-title {
+  font-size: var(--paper-subtitle-size);
+  line-height: 1.25;
+}
+
+.section-subtitle,
+.prose p,
+.gap-lead,
+.gap-chart-desc,
+.method-lead,
+.method-bullets li,
+.training-lead,
+.training-lead-extra,
+.training-stage-desc,
+.training-points li,
+.training-deploy-desc,
+.resource-card p,
+.ack-text,
+.table-note {
+  font-size: var(--paper-body-size);
+  line-height: 1.72;
+}
+
+.view-compare-points,
+.view-compare-points li,
+.view-compare-ood,
+.result-name,
+.scroll-hint,
+.ph-small,
+.resource-badge,
+.bench-table,
+.bibtex-box pre,
+.bibtex-box pre code {
+  font-size: var(--paper-small-size);
+}
+
+.training-stage-label {
+  font-size: 0.82rem;
+}
+
+@media (max-width: 560px) {
+  :root {
+    --paper-section-title-size: clamp(1.8rem, 8vw, 2.25rem);
+    --paper-subtitle-size: 1.35rem;
+    --paper-body-size: 1rem;
+    --paper-small-size: 0.9rem;
+  }
+}
+
+/* Method subsection headings: same hierarchy, centered titles, left-aligned body. */
+.section-method #method-vqa h3,
+.section-method #method-physics h3,
+.section-method #method-training .training-intro h3 {
+  font-size: var(--paper-subtitle-size);
+  line-height: 1.25;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.35rem;
+}
+
+.section-method #method-vqa .method-lead,
+.section-method #method-vqa .method-bullets,
+.section-method #method-physics .method-lead,
+.section-method #method-physics .method-bullets,
+.section-method #method-training .training-lead,
+.section-method #method-training .training-lead-extra {
+  text-align: left;
+}
+
+/* Motivation chart: compact explanatory text beside the figure on desktop. */
+.section-dual-gap .gap-chart-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(520px, 1.25fr);
+  grid-template-areas:
+    "title title"
+    "desc figure";
+  align-items: stretch;
+  gap: 1.35rem 3rem;
+  width: min(var(--paper-content-width), calc(100vw - 3rem));
+  max-width: var(--paper-content-width);
+  margin: 3rem auto 0;
+}
+
+.section-dual-gap .gap-chart-copy {
+  display: contents;
+}
+
+.section-dual-gap .gap-chart-title {
+  grid-area: title;
+  font-size: var(--paper-subtitle-size);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.section-dual-gap .gap-chart-desc {
+  grid-area: desc;
+  font-size: var(--paper-body-size);
+  line-height: 1.72;
+  margin: 0;
+}
+
+.section-dual-gap .gap-chart-figure {
+  grid-area: figure;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.section-dual-gap .gap-chart-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 1000px) {
+  .section-dual-gap .gap-chart-row {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "desc"
+      "figure";
+    gap: 1.75rem;
+  }
+
+  .section-dual-gap .gap-chart-figure {
+    height: auto;
+    margin-top: 0;
+  }
+
+  .section-dual-gap .gap-chart-figure img {
+    height: auto;
+  }
+}

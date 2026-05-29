@@ -132,7 +132,6 @@
   });
 
   /* ── Horizontal scroll: wheel → horizontal on results strip ── */
-  const resultsScroll = document.getElementById("results-scroll");
   const previewVideos = document.querySelectorAll(".result-media");
   const modal = document.getElementById("video-modal");
   const modalTitle = document.getElementById("video-modal-title");
@@ -140,26 +139,59 @@
   const modalClose = document.getElementById("video-modal-close");
   const modalOpenButtons = document.querySelectorAll("[data-modal-video]");
 
-  previewVideos.forEach((video) => {
-    video.muted = true;
-    video.loop = true;
-    video.playsInline = true;
-    video.autoplay = true;
-    video.play().catch(() => {});
-  });
-
-  if (resultsScroll) {
-    resultsScroll.addEventListener(
-      "wheel",
-      (e) => {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          e.preventDefault();
-          resultsScroll.scrollLeft += e.deltaY;
-        }
-      },
-      { passive: false }
-    );
+  function loadPreview(video) {
+    const src = video.dataset.src;
+    if (!src || video.src) return;
+    video.src = src;
+    video.load();
   }
+
+  function updatePreviewVideos() {
+    const margin = 360;
+    previewVideos.forEach((video) => {
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+
+      const rect = video.getBoundingClientRect();
+      const nearViewport =
+        rect.top < window.innerHeight + margin && rect.bottom > -margin;
+
+      if (nearViewport) {
+        loadPreview(video);
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }
+
+  if ("IntersectionObserver" in window) {
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (!(video instanceof HTMLVideoElement)) return;
+
+          if (entry.isIntersecting) {
+            loadPreview(video);
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { rootMargin: "360px 0px", threshold: 0.01 }
+    );
+
+    previewVideos.forEach((video) => videoObserver.observe(video));
+  }
+
+  window.addEventListener("scroll", updatePreviewVideos, { passive: true });
+  window.addEventListener("resize", updatePreviewVideos);
+  window.addEventListener("load", updatePreviewVideos);
+  setTimeout(updatePreviewVideos, 300);
+  setTimeout(updatePreviewVideos, 1200);
 
   function closeVideoModal() {
     if (!modal || !modalPlayer) return;
