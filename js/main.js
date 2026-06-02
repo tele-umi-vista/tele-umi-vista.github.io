@@ -299,8 +299,6 @@
   initResultMediaControls();
 
   function isResultPreviewVisible(video) {
-    const subPanel = video.closest("[data-results-sub-panel]");
-    if (subPanel && subPanel.hidden) return false;
     const primaryPanel = video.closest("[data-results-primary-panel]");
     if (primaryPanel && primaryPanel.hidden) return false;
     return true;
@@ -309,8 +307,6 @@
   function initResultsTabs() {
     const primaryTabs = document.querySelectorAll("[data-results-primary]");
     const primaryPanels = document.querySelectorAll("[data-results-primary-panel]");
-    const subTabs = document.querySelectorAll("[data-results-sub]");
-    const subPanels = document.querySelectorAll("[data-results-sub-panel]");
 
     if (!primaryTabs.length) return;
 
@@ -324,24 +320,7 @@
       primaryPanels.forEach((panel) => {
         panel.hidden = panel.dataset.resultsPrimaryPanel !== id;
       });
-      if (id === "realworld") {
-        updatePreviewVideos();
-      } else {
-        previewVideos.forEach((video) => video.pause());
-      }
-    }
-
-    function activateSub(id) {
-      subTabs.forEach((tab) => {
-        const active = tab.dataset.resultsSub === id;
-        tab.classList.toggle("is-active", active);
-        tab.setAttribute("aria-selected", active ? "true" : "false");
-        tab.tabIndex = active ? 0 : -1;
-      });
-      subPanels.forEach((panel) => {
-        panel.hidden = panel.dataset.resultsSubPanel !== id;
-      });
-      if (id === "task-suite") {
+      if (id === "model-eval") {
         updatePreviewVideos();
       } else {
         previewVideos.forEach((video) => video.pause());
@@ -352,12 +331,7 @@
       tab.addEventListener("click", () => activatePrimary(tab.dataset.resultsPrimary));
     });
 
-    subTabs.forEach((tab) => {
-      tab.addEventListener("click", () => activateSub(tab.dataset.resultsSub));
-    });
-
-    activatePrimary("realworld");
-    activateSub("task-suite");
+    activatePrimary("diagnostic");
   }
 
   function loadPreview(video) {

@@ -34,24 +34,9 @@
     <!-- ========== TEASER：视频 + 简洁品牌与一句话介绍（参考 PRTS） ========== -->
     <section class="hero teaser" aria-label="Teaser">
       <div class="hero-media">
-        <!--
-          【Hero Teaser 视频规格】
-          - 时长：45–90 秒，无配音或轻背景音乐
-          - 内容：三款双臂平台（RealMan / AC one / Galaxea R1 Pro）各 2–3 个成功任务剪辑
-          - 镜头：仅手腕鱼眼视角，与训练分布一致；可快切任务名角标
-          - 格式：MP4 (H.264)，1920×1080，建议 <15MB 便于网页加载
-          - 放置：替换下方 video 的 src，并删除 .placeholder-overlay
-        -->
         <video class="hero-video" id="hero-video" autoplay muted loop playsinline poster="" aria-hidden="true">
-          <!-- <source src="assets/videos/teaser.mp4" type="video/mp4" /> -->
+          <source src="assets/videos/hero_demo_logo.mp4" type="video/mp4" />
         </video>
-        <div class="placeholder-overlay hero-placeholder" data-slot="hero-teaser">
-          <span class="ph-icon" aria-hidden="true">▶</span>
-          <p class="ph-title">Teaser Video · 待上传</p>
-          <p class="ph-hint">RealMan · AC one · R1 Pro 跨平台部署高光剪辑（手腕鱼眼视角）</p>
-        </div>
-        <div class="hero-vignette"></div>
-        <div class="hero-fisheye-mask" aria-hidden="true"></div>
       </div>
 
       <div class="teaser-overlay">
@@ -130,8 +115,9 @@
 
       <!-- 1. Visual grounding / OOD -->
       <div class="gap-point gap-point--visual" id="visual-gap">
-        <div class="container-wide gap-point-inner">
+        <div class="container-wide gap-point-inner gap-point-inner--intro">
           <span class="gap-index">01</span>
+          <h3 class="gap-point-title">Visual Grounding Mismatch</h3>
           <p class="gap-lead">
             Standard VLA and VLM pipelines are built on relatively global, pinhole-perspective supervision. UMI instead records wrist-mounted fisheye views that are local, gripper-centric, and visually far from this pretraining regime.
           </p>
@@ -178,9 +164,6 @@
           </article>
         </div>
 
-        <div class="container-wide gap-point-inner">
-          <h3 class="gap-point-title">Visual Grounding Mismatch</h3>
-        </div>
 
         <div class="gap-chart-row container-wide">
           <div class="gap-chart-copy">
@@ -219,7 +202,7 @@
 
       <!-- 2. Physical plausibility (videos TBD) -->
       <div class="gap-point gap-point--physical" id="physical-gap">
-        <div class="container-wide gap-point-inner">
+        <div class="container-wide gap-point-inner gap-point-inner--intro">
           <span class="gap-index">02</span>
           <h3 class="gap-point-title">Physical Plausibility Mismatch</h3>
           <p class="gap-lead">
@@ -478,69 +461,247 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
         <h2 class="results-hub-title">Experimental Results</h2>
 
         <div class="results-primary-tabs" role="tablist" aria-label="Experimental results categories">
-          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-simulation" data-results-primary="simulation" aria-selected="false" aria-controls="results-panel-simulation" tabindex="-1">Simulation Evaluation</button>
-          <button type="button" class="results-tab results-tab--primary is-active" role="tab" id="results-tab-realworld" data-results-primary="realworld" aria-selected="true" aria-controls="results-panel-realworld">Real-World Deployment</button>
-          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-crl" data-results-primary="crl" aria-selected="false" aria-controls="results-panel-crl" tabindex="-1">Effect of CRL</button>
-          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-pretrain" data-results-primary="pretrain" aria-selected="false" aria-controls="results-panel-pretrain" tabindex="-1">Pre-training Efficiency</button>
+          <button type="button" class="results-tab results-tab--primary is-active" role="tab" id="results-tab-diagnostic" data-results-primary="diagnostic" aria-selected="true" aria-controls="results-panel-diagnostic">Diagnostic Validation</button>
+          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-data-level" data-results-primary="data-level" aria-selected="false" aria-controls="results-panel-data-level" tabindex="-1">Data-Level Validation</button>
+          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-model-eval" data-results-primary="model-eval" aria-selected="false" aria-controls="results-panel-model-eval" tabindex="-1">Model Evaluation</button>
+          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-ablations" data-results-primary="ablations" aria-selected="false" aria-controls="results-panel-ablations" tabindex="-1">Ablations & Analysis</button>
         </div>
 
-        <div id="results-panel-simulation" class="results-primary-panel" data-results-primary-panel="simulation" role="tabpanel" aria-labelledby="results-tab-simulation" hidden>
-          <div class="results-slot-placeholder placeholder-box" data-slot="results-simulation">
-            <span class="ph-tag">Simulation Evaluation</span>
-            <p>RoboTwin-UMI and LIBERO-UMI benchmark comparisons under UMI-style wrist fisheye observations.</p>
-            <p class="ph-small">Rollout videos — coming soon</p>
+        <div id="results-panel-diagnostic" class="results-primary-panel" data-results-primary-panel="diagnostic" role="tabpanel" aria-labelledby="results-tab-diagnostic">
+          
+          <div class="results-anchor-tabs">
+            <a class="results-anchor-tab" href="#diag-policy-learning">Policy Learning Drop</a>
+            <a class="results-anchor-tab" href="#diag-visual-reasoning">Visual Reasoning Drop</a>
+            <a class="results-anchor-tab" href="#diag-raw-umi">Trajectory Infeasibility</a>
           </div>
-          <div class="benchmarks-block results-simulation-benchmarks">
-            <button class="benchmarks-toggle" id="benchmarks-toggle" aria-expanded="false" aria-controls="benchmarks-panel">
-              <span>View simulation benchmarks</span>
-              <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div id="benchmarks-panel" class="benchmarks-panel" hidden>
-              <div class="table-wrap">
-                <table class="bench-table">
-                  <thead>
-                    <tr>
-                      <th>Benchmark</th>
-                      <th>UMI-π</th>
-                      <th>π<sub>0.5</sub></th>
-                      <th>LingBot</th>
-                      <th>Wall-X</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>RoboTwin-UMI</td>
-                      <td class="best">TBD</td>
-                      <td>TBD</td>
-                      <td>TBD</td>
-                      <td>TBD</td>
-                    </tr>
-                    <tr>
-                      <td>LIBERO-UMI</td>
-                      <td class="best">TBD</td>
-                      <td>TBD</td>
-                      <td>TBD</td>
-                      <td>TBD</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p class="table-note">数值待论文定稿后填入 · 均为 UMI-style 手腕鱼眼观测设定</p>
+
+          <h4 class="results-panel-title">Diagnostic Validation Experiments</h4>
+          <p class="results-evidence-text">Diagnostic validation aims to verify the two UMI-to-VLA bottlenecks: perception mismatch and physical infeasibility. We evaluate these challenges by measuring policy degradation under wrist-fisheye views on the LIBERO and RoboTwin benchmarks, assessing the impaired visual reasoning of VLMs across four spatial benchmarks (Where2Place, RefSpatial, ERQA, EmbSpatial), and demonstrating the physical unexecutability of raw human trajectories via real-robot replay on the RealMan embodiment.</p>
+    
+          <section class="results-experiment" id="diag-policy-learning">
+            <h3>Fisheye observations degrade policy learning</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                We evaluate the impact of UMI-style observations on policy learning. Table 1 isolates view factors on
+                RoboTwin, showing that shifting from standard multi-view to local, distorted wrist-fisheye observations
+                drops the \( \pi_{0.5} \) success rate from 82.0% to 59.4%. 
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table1.jpg"
+                  alt="Table 1: View-factor ablation in RoboTwin under different observation settings"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <p class="results-evidence-text">
+                Table 2 confirms this genuine perception
+                bottleneck across multiple VLA models (\( \pi_{0.5} \), LingBot-VLA, WALL-X) and benchmarks (LIBERO,
+                RoboTwin), demonstrating consistent performance degradation under wrist-fisheye training.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table2.jpg"
+                  alt="Table 2: Policy degradation under wrist-fisheye observations across models and benchmarks"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
             </div>
-          </div>
+          </section>
+
+          <section class="results-experiment" id="diag-visual-reasoning">
+            <h3>Fisheye observations degrade robot-relevant visual reasoning</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                To quantify visual reasoning degradation, we evaluate five general and robot-specialized VLMs across
+                four spatial benchmarks. As shown in Table 3, fisheye-transformed images cause a consistent performance
+                drop across all models (averaging an 8.6% relative degradation) compared to standard perspectives. This
+                confirms that pretrained VLMs lose critical spatial and object understanding under distorted
+                wrist-fisheye views, necessitating our perception-aligned VQA.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table3.jpg"
+                  alt="Table 3: Visual reasoning degradation under fisheye-transformed images across VLMs and spatial benchmarks"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
+
+          <section class="results-experiment" id="diag-raw-umi">
+            <h3>Raw UMI trajectories are not always executable</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                We audit the physical executability of raw UMI trajectories on a RealMan robot across three representative tasks. As illustrated in Figure 6, both simulation and real-world replays reveal significant deviations between human-demonstrated trajectories and feasible robot poses due to inherent physical constraints. These execution deviations directly cause task failures, empirically confirming that human-collected UMI data cannot serve as executable supervision without physical validation, otherwise VLA models will learn physically infeasible actions.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_figure6.jpg"
+                  alt="Table 3: Visual reasoning degradation under fisheye-transformed images across VLMs and spatial benchmarks"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
         </div>
 
-        <div id="results-panel-realworld" class="results-primary-panel" data-results-primary-panel="realworld" role="tabpanel" aria-labelledby="results-tab-realworld">
-          <div class="results-sub-tabs" role="tablist" aria-label="Real-world deployment subsets">
-            <button type="button" class="results-tab results-tab--sub is-active" role="tab" id="results-subtab-task-suite" data-results-sub="task-suite" aria-selected="true" aria-controls="results-sub-task-suite">Task Suite</button>
-            <button type="button" class="results-tab results-tab--sub" role="tab" id="results-subtab-controlled" data-results-sub="controlled" aria-selected="false" aria-controls="results-sub-controlled" tabindex="-1">Controlled Generalization</button>
-            <button type="button" class="results-tab results-tab--sub" role="tab" id="results-subtab-interventions" data-results-sub="interventions" aria-selected="false" aria-controls="results-sub-interventions" tabindex="-1">Interventions</button>
-            <button type="button" class="results-tab results-tab--sub" role="tab" id="results-subtab-baseline" data-results-sub="baseline" aria-selected="false" aria-controls="results-sub-baseline" tabindex="-1">Baseline Failures</button>
+        <div id="results-panel-data-level" class="results-primary-panel" data-results-primary-panel="data-level" role="tabpanel" aria-labelledby="results-tab-data-level" hidden>
+          <div class="results-anchor-tabs">
+            <a class="results-anchor-tab" href="#data-vqa">Perception-Aligned VQA</a>
+            <a class="results-anchor-tab" href="#data-physical-score">Physical Validation</a>
+            <a class="results-anchor-tab" href="#data-failure-analysis">Failure Analysis</a>
+            <a class="results-anchor-tab" href="#data-embodiment-scoring">Embodiment Scoring</a>
           </div>
 
-          <div id="results-sub-task-suite" class="results-sub-panel" data-results-sub-panel="task-suite" role="tabpanel" aria-labelledby="results-subtab-task-suite">
+          <h4 class="results-panel-title">Data-Level Validation Experiments</h4>
+          <p class="results-evidence-text">        
+            In this section, we evaluate whether the two data-level components of VISTA effectively address the two UMI-to-VLA bottlenecks identified in the diagnostic validation.
+          </p>
+
+
+          <section class="results-experiment" id="data-vqa">
+            <h3>Effect of perception-aligned VQA</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                We demonstrate that co-training with wrist-fisheye-aligned UMI-VQA significantly improves policy performance, increasing the aggregate success rate from 45.0% to 55.0%. Conversely, using standard-perspective VQA degrades performance due to a severe visual distribution mismatch.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table4.jpg"
+                  alt="Table 4: Policy performance comparison between wrist-fisheye-aligned UMI-VQA and standard-perspective VQA"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
+
+          <section class="results-experiment" id="data-physical-score">
+            <h3>Effects of physical score validation</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                We evaluate whether physical scoring effectively prevents the policy from learning unexecutable actions. Using a stapler-placement task on a RealMan robot, we compared policies trained on two equally-sized data subsets: one with low physical scores and one with high physical scores. 
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_figure7.jpg"
+                  alt="Figure 7: Score-controlled policy performance comparison between low-score and high-score subsets"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <p class="results-evidence-text">
+                We measured three metrics: Grasping Success Rate (GSR), Overall Success Rate (OSR), and Post-grasp Success Rate. While both policies achieved comparable GSR, the high-score policy dramatically outperformed the low-score policy in both PSR and OSR.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table5.jpg"
+                  alt="Table 5: Physical validation score distribution across raw UMI trajectories and validated subsets"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
+
+          <section class="results-experiment" id="data-failure-analysis">
+            <h3>Failure analysis</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                An inspection of real-world deployments reveals that policies trained on low-score data generate trajectories that exceed the target robot's workspace limits, causing critical execution deviations. High-score data produces highly executable motions that the robot can faithfully follow.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_figure8.jpg"
+                  alt="Figure 8: Real-world deployment failure analysis between low-score and high-score policies"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_figure9.jpg"
+                  alt="Figure 9: Real-world deployment failure analysis between low-score and high-score policies"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
+
+          <section class="results-experiment" id="data-embodiment-scoring">
+            <h3>Embodiment-conditioned scoring</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                We re-score identical UMI trajectories across different robotic platforms (RealMan, R1Pro, ACone) and show that a trajectory's feasibility varies by embodiment. This highlights that trajectory filtering must be explicitly conditioned on the target robot to ensure reliable deployment.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table6.jpg"
+                  alt="Table 6: Physical validation score distribution across different robotic platforms"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
+        </div>
+
+        <div id="results-panel-model-eval" class="results-primary-panel" data-results-primary-panel="model-eval" role="tabpanel" aria-labelledby="results-tab-model-eval" hidden>
+          <div class="results-anchor-tabs">
+            <a class="results-anchor-tab" href="#model-sim-benchmark">Simulation Evaluation</a>
+            <a class="results-anchor-tab" href="#model-real-robot-eval">Real-World Evaluation</a>
+          </div>
+
+          <h4 class="results-panel-title">Model Evaluation Experiments</h4>
+
+          <section class="results-experiment" id="model-sim-benchmark">
+            <h3>Simulation benchmark</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                We evaluate VISTA against three VLA baselines (\( \pi_{0.5} \), LingBot, and WALL-X) on two adapted
+                UMI-style simulation benchmarks: RoboTwin-UMI and LIBERO-UMI. To ensure a fair comparison that isolates
+                our architectural adaptations, all models are trained on the exact same recollected wrist-fisheye
+                demonstrations. VISTA achieves the highest performance across both benchmarks, reaching an average
+                success rate of 81.3%. This outperforms \( \pi_{0.5} \) by 5.5 points, LingBot by 15.5 points, and
+                WALL-X by 38.7 points, demonstrating that explicit adaptation to fisheye observations and validated
+                action data significantly enhances policy learning.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table7.jpg"
+                  alt="Table 7: Simulation performance comparison between VISTA and baselines on RoboTwin-UMI and LIBERO-UMI benchmarks"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
+
+          <section class="results-experiment" id="model-real-robot-eval">
+            <h3>Real-robot evaluation</h3>
+            <p class="results-evidence-text">
+              We deploy VISTA across 20 diverse real-world UMI-collected manipulation tasks that test complex
+              capabilities like precise spatial localization and dual wrist-view integration. All methods are evaluated
+              under strictly controlled conditions, utilizing the same validated UMI dataset, robot platform, and
+              object configurations across 20 trials per task. VISTA achieves the highest average success rate of
+              59.8%, delivering a 7.0-point absolute gain over \( \pi_{0.5} \) and outperforming LingBot by 28.5
+              points. These results prove that the benefits of VISTA's UMI-oriented design successfully transfer to
+              robust, physical robot deployment.
+            </p>
+            <figure class="results-table-figure">
+              <img
+                src="assets/images/diag_table8.jpg"
+                alt="Table 8: Real-world performance comparison between VISTA and baselines on 20 UMI-collected manipulation tasks"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <div class="results-scroll-wrap">
-              <p class="scroll-hint">Real-robot evaluation on 20 UMI-collected manipulation tasks</p>
               <div class="results-scroll" id="results-scroll" tabindex="0">
           <article class="result-card" data-task="task01_close_laptop_and_place_mouse">
             <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task01_close_laptop_and_place_mouse.mp4" data-modal-title="Close Laptop and Place Mouse">
@@ -664,73 +825,55 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
           </article>
               </div>
             </div>
-          </div>
-
-          <div id="results-sub-controlled" class="results-sub-panel" data-results-sub-panel="controlled" role="tabpanel" aria-labelledby="results-subtab-controlled" hidden>
-            <div class="results-slot-placeholder placeholder-box" data-slot="results-controlled">
-              <span class="ph-tag">Controlled Generalization</span>
-              <p>Systematic generalization across object instances, layouts, and lighting.</p>
-              <p class="ph-small">Videos and success-rate breakdowns — coming soon</p>
-            </div>
-          </div>
-
-          <div id="results-sub-interventions" class="results-sub-panel" data-results-sub-panel="interventions" role="tabpanel" aria-labelledby="results-subtab-interventions" hidden>
-            <div class="results-slot-placeholder placeholder-box" data-slot="results-interventions">
-              <span class="ph-tag">Interventions</span>
-              <p>Mid-episode perturbations and recovery rollouts on deployed policies.</p>
-              <p class="ph-small">Comparison clips — coming soon</p>
-            </div>
-          </div>
-
-          <div id="results-sub-baseline" class="results-sub-panel" data-results-sub-panel="baseline" role="tabpanel" aria-labelledby="results-subtab-baseline" hidden>
-            <div class="results-slot-placeholder placeholder-box" data-slot="results-baseline-failures">
-              <span class="ph-tag">Baseline Failures</span>
-              <p>Representative failure modes of baselines without UMI-VQA and physical validation.</p>
-              <p class="ph-small">Failure case gallery — coming soon</p>
-            </div>
-          </div>
-
-          <div class="stat-banner">
-            <div class="stat-item">
-              <span class="stat-value">8M</span>
-              <span class="stat-label">UMI-VQA samples</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value">100k+</span>
-              <span class="stat-label">Validated trajectories</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value">20</span>
-              <span class="stat-label">Real-world tasks</span>
-            </div>
-            <div class="stat-item stat-item--highlight">
-              <span class="stat-value">ρ ↑</span>
-              <span class="stat-label">Validation score ↔ deployment success</span>
-            </div>
-          </div>
-
-          <div class="results-realworld-fig">
-            <div class="fig-placeholder fig-chart" data-slot="fig5-histogram">
-              <span class="ph-tag">Fig. 5 · Score vs. Success Rate</span>
-              <p>低分轨迹子集 vs. 高分轨迹子集成功率对比直方图</p>
-            </div>
-          </div>
+          </section>
         </div>
 
-        <div id="results-panel-crl" class="results-primary-panel" data-results-primary-panel="crl" role="tabpanel" aria-labelledby="results-tab-crl" hidden>
-          <div class="results-slot-placeholder placeholder-box" data-slot="results-crl">
-            <span class="ph-tag">Effect of CRL</span>
-            <p>Ablation on continuous reinforcement / representation learning components in the training recipe.</p>
-            <p class="ph-small">Learning curves and deployment metrics — coming soon</p>
-          </div>
-        </div>
 
-        <div id="results-panel-pretrain" class="results-primary-panel" data-results-primary-panel="pretrain" role="tabpanel" aria-labelledby="results-tab-pretrain" hidden>
-          <div class="results-slot-placeholder placeholder-box" data-slot="results-pretrain-efficiency">
-            <span class="ph-tag">Pre-training Efficiency</span>
-            <p>Data scaling, stage-wise co-training, and sample efficiency vs. downstream success.</p>
-            <p class="ph-small">Scaling plots — coming soon</p>
+        <div id="results-panel-ablations" class="results-primary-panel" data-results-primary-panel="ablations" role="tabpanel" aria-labelledby="results-tab-ablations" hidden>
+          <div class="results-anchor-tabs">
+            <a class="results-anchor-tab" href="#ablation-components">Component Ablation</a>
+            <a class="results-anchor-tab" href="#ablation-attention">Attntion Analysis</a>
           </div>
+
+          <h4 class="results-panel-title">Ablations Experiments</h4>
+          <p class="results-evidence-text">
+
+          </p>
+
+          <section class="results-experiment" id="ablation-components">
+            <div class="results-evidence-block">
+              <h3>Component ablation</h3>
+              <p class="results-evidence-text">
+                We conduct a unified ablation study to isolate the impact of VISTA's key architectural designs. Compared to the full model's 68.3% success rate, performance drops significantly when replacing the Stage-2 flow-matching action expert (down to 52.4% from scratch, or 60.2% using the original \( \pi_{0.5} \) expert), removing proprioceptive state inputs (down to 61.9%), or switching from delta to absolute action prediction (down to 53.1%). This validates the critical contributions of our two-stage action expert, state conditioning, and relative action representations.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_table9.jpg"
+                  alt="Table 9: Component ablation results for VISTA"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+            
+          </section>
+
+          <section class="results-experiment" id="ablation-attention">
+            <h3>Attention-based analysis of visual grounding</h3>
+            <div class="results-evidence-block">
+              <p class="results-evidence-text">
+                To qualitatively assess visual grounding, we visualize the attention maps of both VISTA and \( \pi_{0.5} \) processing auxiliary wrist-fisheye views. While \( \pi_{0.5} \) exhibits diffuse and scattered attention, VISTA successfully localizes its focus on critical task-relevant areas, including the active gripper, the manipulated object, and the local interaction region. This confirms that VISTA develops a much stronger and more precise visual understanding of UMI-style observations.
+              </p>
+              <figure class="results-table-figure">
+                <img
+                  src="assets/images/diag_figure10.jpg"
+                  alt="Figure 10: Attention map comparison between VISTA and pi_0.5 on wrist-fisheye views"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </section>
         </div>
 
       </div>
