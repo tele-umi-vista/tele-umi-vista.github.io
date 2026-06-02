@@ -457,222 +457,273 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
 
     <!-- ========== RESULTS ========== -->
     <section class="section section-results" id="results">
-      <div class="container-wide">
-        <h2 class="section-title center">Real-World Deployments &amp; Results</h2>
-      </div>
+      <div class="results-hub container-wide">
+        <h2 class="results-hub-title">Experimental Results</h2>
 
-      <!-- Teaser 区块（Method 与 Results 之间的 climax） -->
-      <div class="results-teaser placeholder-box" data-slot="results-teaser">
-        <!--
-          【Results 主视频】
-          - 可与 Hero 不同：侧重单任务完整 uncut rollout（如折衣、收桌、高精度对齐）
-          - 15–30 秒，手腕双视角画中画或左右分屏
-        -->
-        <span class="ph-tag">待上传 · Deployment Highlight Reel</span>
-        <p>完整自主执行片段（ uncut policy rollout ）</p>
-        <p class="ph-small">建议：长视野任务 + 接触丰富任务各一段</p>
-      </div>
+        <div class="results-primary-tabs" role="tablist" aria-label="Experimental results categories">
+          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-simulation" data-results-primary="simulation" aria-selected="false" aria-controls="results-panel-simulation" tabindex="-1">Simulation Evaluation</button>
+          <button type="button" class="results-tab results-tab--primary is-active" role="tab" id="results-tab-realworld" data-results-primary="realworld" aria-selected="true" aria-controls="results-panel-realworld">Real-World Deployment</button>
+          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-crl" data-results-primary="crl" aria-selected="false" aria-controls="results-panel-crl" tabindex="-1">Effect of CRL</button>
+          <button type="button" class="results-tab results-tab--primary" role="tab" id="results-tab-pretrain" data-results-primary="pretrain" aria-selected="false" aria-controls="results-panel-pretrain" tabindex="-1">Pre-training Efficiency</button>
+        </div>
 
-      <!-- 横向滚动 GIF 墙 -->
-      <div class="results-scroll-wrap">
-        <p class="scroll-hint">Real-robot evaluation on 20 UMI-collected manipulation tasks</p>
-        <div class="results-scroll" id="results-scroll" tabindex="0">
-          <article class="result-card" data-task="task01_close_laptop_and_place_mouse">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task01_close_laptop_and_place_mouse.mp4" data-modal-title="Close Laptop and Place Mouse">
-              <video class="result-media" data-src="assets/videos/20task_resized/task01_close_laptop_and_place_mouse.mp4" muted loop playsinline preload="none"></video>
+        <div id="results-panel-simulation" class="results-primary-panel" data-results-primary-panel="simulation" role="tabpanel" aria-labelledby="results-tab-simulation" hidden>
+          <div class="results-slot-placeholder placeholder-box" data-slot="results-simulation">
+            <span class="ph-tag">Simulation Evaluation</span>
+            <p>RoboTwin-UMI and LIBERO-UMI benchmark comparisons under UMI-style wrist fisheye observations.</p>
+            <p class="ph-small">Rollout videos — coming soon</p>
+          </div>
+          <div class="benchmarks-block results-simulation-benchmarks">
+            <button class="benchmarks-toggle" id="benchmarks-toggle" aria-expanded="false" aria-controls="benchmarks-panel">
+              <span>View simulation benchmarks</span>
+              <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </button>
+            <div id="benchmarks-panel" class="benchmarks-panel" hidden>
+              <div class="table-wrap">
+                <table class="bench-table">
+                  <thead>
+                    <tr>
+                      <th>Benchmark</th>
+                      <th>UMI-π</th>
+                      <th>π<sub>0.5</sub></th>
+                      <th>LingBot</th>
+                      <th>Wall-X</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>RoboTwin-UMI</td>
+                      <td class="best">TBD</td>
+                      <td>TBD</td>
+                      <td>TBD</td>
+                      <td>TBD</td>
+                    </tr>
+                    <tr>
+                      <td>LIBERO-UMI</td>
+                      <td class="best">TBD</td>
+                      <td>TBD</td>
+                      <td>TBD</td>
+                      <td>TBD</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="table-note">数值待论文定稿后填入 · 均为 UMI-style 手腕鱼眼观测设定</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="results-panel-realworld" class="results-primary-panel" data-results-primary-panel="realworld" role="tabpanel" aria-labelledby="results-tab-realworld">
+          <div class="results-sub-tabs" role="tablist" aria-label="Real-world deployment subsets">
+            <button type="button" class="results-tab results-tab--sub is-active" role="tab" id="results-subtab-task-suite" data-results-sub="task-suite" aria-selected="true" aria-controls="results-sub-task-suite">Task Suite</button>
+            <button type="button" class="results-tab results-tab--sub" role="tab" id="results-subtab-controlled" data-results-sub="controlled" aria-selected="false" aria-controls="results-sub-controlled" tabindex="-1">Controlled Generalization</button>
+            <button type="button" class="results-tab results-tab--sub" role="tab" id="results-subtab-interventions" data-results-sub="interventions" aria-selected="false" aria-controls="results-sub-interventions" tabindex="-1">Interventions</button>
+            <button type="button" class="results-tab results-tab--sub" role="tab" id="results-subtab-baseline" data-results-sub="baseline" aria-selected="false" aria-controls="results-sub-baseline" tabindex="-1">Baseline Failures</button>
+          </div>
+
+          <div id="results-sub-task-suite" class="results-sub-panel" data-results-sub-panel="task-suite" role="tabpanel" aria-labelledby="results-subtab-task-suite">
+            <div class="results-scroll-wrap">
+              <p class="scroll-hint">Real-robot evaluation on 20 UMI-collected manipulation tasks</p>
+              <div class="results-scroll" id="results-scroll" tabindex="0">
+          <article class="result-card" data-task="task01_close_laptop_and_place_mouse">
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task01_close_laptop_and_place_mouse.mp4" data-modal-title="Close Laptop and Place Mouse">
+              <video class="result-media" data-src="assets/videos/20task_resized/task01_close_laptop_and_place_mouse.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Close Laptop and Place Mouse</p>
           </article>
           <article class="result-card" data-task="task02_place_dolls_into_box">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task02_place_dolls_into_box.mp4" data-modal-title="Place Dolls into Box">
-              <video class="result-media" data-src="assets/videos/20task_resized/task02_place_dolls_into_box.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task02_place_dolls_into_box.mp4" data-modal-title="Place Dolls into Box">
+              <video class="result-media" data-src="assets/videos/20task_resized/task02_place_dolls_into_box.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Place Dolls into Box</p>
           </article>
           <article class="result-card" data-task="task03_take_dolls_out_of_box">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task03_take_dolls_out_of_box.mp4" data-modal-title="Take Dolls out of Box">
-              <video class="result-media" data-src="assets/videos/20task_resized/task03_take_dolls_out_of_box.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task03_take_dolls_out_of_box.mp4" data-modal-title="Take Dolls out of Box">
+              <video class="result-media" data-src="assets/videos/20task_resized/task03_take_dolls_out_of_box.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Take Dolls out of Box</p>
           </article>
           <article class="result-card" data-task="task04_place_stapler_on_cabinet">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task04_place_stapler_on_cabinet.mp4" data-modal-title="Place Stapler on Cabinet">
-              <video class="result-media" data-src="assets/videos/20task_resized/task04_place_stapler_on_cabinet.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task04_place_stapler_on_cabinet.mp4" data-modal-title="Place Stapler on Cabinet">
+              <video class="result-media" data-src="assets/videos/20task_resized/task04_place_stapler_on_cabinet.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Place Stapler on Cabinet</p>
           </article>
           <article class="result-card" data-task="task05_stack_side_cubes_on_center_cube">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task05_stack_side_cubes_on_center_cube.mp4" data-modal-title="Stack Side Cubes on Center Cube">
-              <video class="result-media" data-src="assets/videos/20task_resized/task05_stack_side_cubes_on_center_cube.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task05_stack_side_cubes_on_center_cube.mp4" data-modal-title="Stack Side Cubes on Center Cube">
+              <video class="result-media" data-src="assets/videos/20task_resized/task05_stack_side_cubes_on_center_cube.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Stack Side Cubes on Center Cube</p>
           </article>
           <article class="result-card" data-task="task06_sort_cubes_by_color_into_tray">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task06_sort_cubes_by_color_into_tray.mp4" data-modal-title="Sort Cubes by Color into Tray">
-              <video class="result-media" data-src="assets/videos/20task_resized/task06_sort_cubes_by_color_into_tray.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task06_sort_cubes_by_color_into_tray.mp4" data-modal-title="Sort Cubes by Color into Tray">
+              <video class="result-media" data-src="assets/videos/20task_resized/task06_sort_cubes_by_color_into_tray.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Sort Cubes by Color into Tray</p>
           </article>
           <article class="result-card" data-task="task07_retrieve_toast_from_toaster">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task07_retrieve_toast_from_toaster.mp4" data-modal-title="Retrieve Toast from Toaster">
-              <video class="result-media" data-src="assets/videos/20task_resized/task07_retrieve_toast_from_toaster.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task07_retrieve_toast_from_toaster.mp4" data-modal-title="Retrieve Toast from Toaster">
+              <video class="result-media" data-src="assets/videos/20task_resized/task07_retrieve_toast_from_toaster.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Retrieve Toast from Toaster</p>
           </article>
           <article class="result-card" data-task="task08_pick_target_fruits_from_bowl">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task08_pick_target_fruits_from_bowl.mp4" data-modal-title="Pick Target Fruits from Bowl">
-              <video class="result-media" data-src="assets/videos/20task_resized/task08_pick_target_fruits_from_bowl.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task08_pick_target_fruits_from_bowl.mp4" data-modal-title="Pick Target Fruits from Bowl">
+              <video class="result-media" data-src="assets/videos/20task_resized/task08_pick_target_fruits_from_bowl.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Pick Target Fruits from Bowl</p>
           </article>
           <article class="result-card" data-task="task09_put_doll_into_drawer_and_close">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task09_put_doll_into_drawer_and_close.mp4" data-modal-title="Put Doll into Drawer and Close">
-              <video class="result-media" data-src="assets/videos/20task_resized/task09_put_doll_into_drawer_and_close.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task09_put_doll_into_drawer_and_close.mp4" data-modal-title="Put Doll into Drawer and Close">
+              <video class="result-media" data-src="assets/videos/20task_resized/task09_put_doll_into_drawer_and_close.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Put Doll into Drawer and Close</p>
           </article>
           <article class="result-card" data-task="task10_open_drawer">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task10_open_drawer.mp4" data-modal-title="Open Drawer">
-              <video class="result-media" data-src="assets/videos/20task_resized/task10_open_drawer.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task10_open_drawer.mp4" data-modal-title="Open Drawer">
+              <video class="result-media" data-src="assets/videos/20task_resized/task10_open_drawer.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Open Drawer</p>
           </article>
           <article class="result-card" data-task="task11_organize_dolls">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task11_organize_dolls.mp4" data-modal-title="Organize Dolls">
-              <video class="result-media" data-src="assets/videos/20task_resized/task11_organize_dolls.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task11_organize_dolls.mp4" data-modal-title="Organize Dolls">
+              <video class="result-media" data-src="assets/videos/20task_resized/task11_organize_dolls.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Organize Dolls</p>
           </article>
           <article class="result-card" data-task="task12_place_bun_into_rice_cooker_and_close">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task12_place_bun_into_rice_cooker_and_close.mp4" data-modal-title="Place Bun into Rice Cooker and Close">
-              <video class="result-media" data-src="assets/videos/20task_resized/task12_place_bun_into_rice_cooker_and_close.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task12_place_bun_into_rice_cooker_and_close.mp4" data-modal-title="Place Bun into Rice Cooker and Close">
+              <video class="result-media" data-src="assets/videos/20task_resized/task12_place_bun_into_rice_cooker_and_close.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Place Bun into Rice Cooker and Close</p>
           </article>
           <article class="result-card" data-task="task13_arrange_flowers">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task13_arrange_flowers.mp4" data-modal-title="Arrange Flowers">
-              <video class="result-media" data-src="assets/videos/20task_resized/task13_arrange_flowers.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task13_arrange_flowers.mp4" data-modal-title="Arrange Flowers">
+              <video class="result-media" data-src="assets/videos/20task_resized/task13_arrange_flowers.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Arrange Flowers</p>
           </article>
           <article class="result-card" data-task="task14_place_drink_into_box">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task14_place_drink_into_box.mp4" data-modal-title="Place Drink into Box">
-              <video class="result-media" data-src="assets/videos/20task_resized/task14_place_drink_into_box.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task14_place_drink_into_box.mp4" data-modal-title="Place Drink into Box">
+              <video class="result-media" data-src="assets/videos/20task_resized/task14_place_drink_into_box.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Place Drink into Box</p>
           </article>
           <article class="result-card" data-task="task15_hang_mug_on_rack">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task15_hang_mug_on_rack.mp4" data-modal-title="Hang Mug on Rack">
-              <video class="result-media" data-src="assets/videos/20task_resized/task15_hang_mug_on_rack.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task15_hang_mug_on_rack.mp4" data-modal-title="Hang Mug on Rack">
+              <video class="result-media" data-src="assets/videos/20task_resized/task15_hang_mug_on_rack.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Hang Mug on Rack</p>
           </article>
           <article class="result-card" data-task="task16_stack_pen_holders">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task16_stack_pen_holders.mp4" data-modal-title="Stack Pen Holders">
-              <video class="result-media" data-src="assets/videos/20task_resized/task16_stack_pen_holders.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task16_stack_pen_holders.mp4" data-modal-title="Stack Pen Holders">
+              <video class="result-media" data-src="assets/videos/20task_resized/task16_stack_pen_holders.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Stack Pen Holders</p>
           </article>
           <article class="result-card" data-task="task17_pour_chips_from_bowl_to_plate">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task17_pour_chips_from_bowl_to_plate.mp4" data-modal-title="Pour Chips from Bowl to Plate">
-              <video class="result-media" data-src="assets/videos/20task_resized/task17_pour_chips_from_bowl_to_plate.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task17_pour_chips_from_bowl_to_plate.mp4" data-modal-title="Pour Chips from Bowl to Plate">
+              <video class="result-media" data-src="assets/videos/20task_resized/task17_pour_chips_from_bowl_to_plate.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Pour Chips from Bowl to Plate</p>
           </article>
           <article class="result-card" data-task="task18_pick_plum_from_cluttered_fruits">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task18_pick_plum_from_cluttered_fruits.mp4" data-modal-title="Pick Plum from Cluttered Fruits">
-              <video class="result-media" data-src="assets/videos/20task_resized/task18_pick_plum_from_cluttered_fruits.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task18_pick_plum_from_cluttered_fruits.mp4" data-modal-title="Pick Plum from Cluttered Fruits">
+              <video class="result-media" data-src="assets/videos/20task_resized/task18_pick_plum_from_cluttered_fruits.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Pick Plum from Cluttered Fruits</p>
           </article>
           <article class="result-card" data-task="task19_stack_paper_cups">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task19_stack_paper_cups.mp4" data-modal-title="Stack Paper Cups">
-              <video class="result-media" data-src="assets/videos/20task_resized/task19_stack_paper_cups.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task19_stack_paper_cups.mp4" data-modal-title="Stack Paper Cups">
+              <video class="result-media" data-src="assets/videos/20task_resized/task19_stack_paper_cups.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Stack Paper Cups</p>
           </article>
           <article class="result-card" data-task="task20_place_fruits">
-            <button class="result-media-btn" type="button" data-modal-video="assets/videos/20task_resized/task20_place_fruits.mp4" data-modal-title="Place Fruits">
-              <video class="result-media" data-src="assets/videos/20task_resized/task20_place_fruits.mp4" muted loop playsinline preload="none"></video>
-            </button>
+            <div class="result-media-player" data-modal-video="assets/videos/20task_resized/task20_place_fruits.mp4" data-modal-title="Place Fruits">
+              <video class="result-media" data-src="assets/videos/20task_resized/task20_place_fruits.mp4" muted loop playsinline autoplay preload="metadata"></video>
+            </div>
             <p class="result-name">Place Fruits</p>
           </article>
+              </div>
+            </div>
+          </div>
+
+          <div id="results-sub-controlled" class="results-sub-panel" data-results-sub-panel="controlled" role="tabpanel" aria-labelledby="results-subtab-controlled" hidden>
+            <div class="results-slot-placeholder placeholder-box" data-slot="results-controlled">
+              <span class="ph-tag">Controlled Generalization</span>
+              <p>Systematic generalization across object instances, layouts, and lighting.</p>
+              <p class="ph-small">Videos and success-rate breakdowns — coming soon</p>
+            </div>
+          </div>
+
+          <div id="results-sub-interventions" class="results-sub-panel" data-results-sub-panel="interventions" role="tabpanel" aria-labelledby="results-subtab-interventions" hidden>
+            <div class="results-slot-placeholder placeholder-box" data-slot="results-interventions">
+              <span class="ph-tag">Interventions</span>
+              <p>Mid-episode perturbations and recovery rollouts on deployed policies.</p>
+              <p class="ph-small">Comparison clips — coming soon</p>
+            </div>
+          </div>
+
+          <div id="results-sub-baseline" class="results-sub-panel" data-results-sub-panel="baseline" role="tabpanel" aria-labelledby="results-subtab-baseline" hidden>
+            <div class="results-slot-placeholder placeholder-box" data-slot="results-baseline-failures">
+              <span class="ph-tag">Baseline Failures</span>
+              <p>Representative failure modes of baselines without UMI-VQA and physical validation.</p>
+              <p class="ph-small">Failure case gallery — coming soon</p>
+            </div>
+          </div>
+
+          <div class="stat-banner">
+            <div class="stat-item">
+              <span class="stat-value">8M</span>
+              <span class="stat-label">UMI-VQA samples</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">100k+</span>
+              <span class="stat-label">Validated trajectories</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">20</span>
+              <span class="stat-label">Real-world tasks</span>
+            </div>
+            <div class="stat-item stat-item--highlight">
+              <span class="stat-value">ρ ↑</span>
+              <span class="stat-label">Validation score ↔ deployment success</span>
+            </div>
+          </div>
+
+          <div class="results-realworld-fig">
+            <div class="fig-placeholder fig-chart" data-slot="fig5-histogram">
+              <span class="ph-tag">Fig. 5 · Score vs. Success Rate</span>
+              <p>低分轨迹子集 vs. 高分轨迹子集成功率对比直方图</p>
+            </div>
+          </div>
         </div>
+
+        <div id="results-panel-crl" class="results-primary-panel" data-results-primary-panel="crl" role="tabpanel" aria-labelledby="results-tab-crl" hidden>
+          <div class="results-slot-placeholder placeholder-box" data-slot="results-crl">
+            <span class="ph-tag">Effect of CRL</span>
+            <p>Ablation on continuous reinforcement / representation learning components in the training recipe.</p>
+            <p class="ph-small">Learning curves and deployment metrics — coming soon</p>
+          </div>
+        </div>
+
+        <div id="results-panel-pretrain" class="results-primary-panel" data-results-primary-panel="pretrain" role="tabpanel" aria-labelledby="results-tab-pretrain" hidden>
+          <div class="results-slot-placeholder placeholder-box" data-slot="results-pretrain-efficiency">
+            <span class="ph-tag">Pre-training Efficiency</span>
+            <p>Data scaling, stage-wise co-training, and sample efficiency vs. downstream success.</p>
+            <p class="ph-small">Scaling plots — coming soon</p>
+          </div>
+        </div>
+
       </div>
+
       <div class="video-modal" id="video-modal" hidden>
         <div class="video-modal-backdrop" data-close-video-modal></div>
         <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
           <button class="video-modal-close" type="button" id="video-modal-close" aria-label="Close video">&times;</button>
           <h3 class="video-modal-title" id="video-modal-title"></h3>
           <video id="video-modal-player" controls preload="metadata"></video>
-        </div>
-      </div>
-
-      <!-- 关键数字 headline -->
-      <div class="stat-banner">
-        <div class="stat-item">
-          <span class="stat-value">8M</span>
-          <span class="stat-label">UMI-VQA samples</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">100k+</span>
-          <span class="stat-label">Validated trajectories</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-value">20</span>
-          <span class="stat-label">Real-world tasks</span>
-        </div>
-        <div class="stat-item stat-item--highlight">
-          <span class="stat-value">ρ ↑</span>
-          <span class="stat-label">Validation score ↔ deployment success</span>
-        </div>
-      </div>
-
-      <!-- Fig.5 直方图占位 -->
-      <div class="container-wide">
-        <div class="fig-placeholder fig-chart" data-slot="fig5-histogram">
-          <span class="ph-tag">Fig. 5 · Score vs. Success Rate</span>
-          <p>低分轨迹子集 vs. 高分轨迹子集成功率对比直方图</p>
-        </div>
-      </div>
-
-      <!-- 仿真表格（可折叠） -->
-      <div class="container-narrow benchmarks-block">
-        <button class="benchmarks-toggle" id="benchmarks-toggle" aria-expanded="false" aria-controls="benchmarks-panel">
-          <span>View simulation benchmarks</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </button>
-        <div id="benchmarks-panel" class="benchmarks-panel" hidden>
-          <div class="table-wrap">
-            <table class="bench-table">
-              <thead>
-                <tr>
-                  <th>Benchmark</th>
-                  <th>UMI-π</th>
-                  <th>π<sub>0.5</sub></th>
-                  <th>LingBot</th>
-                  <th>Wall-X</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>RoboTwin-UMI</td>
-                  <td class="best">TBD</td>
-                  <td>TBD</td>
-                  <td>TBD</td>
-                  <td>TBD</td>
-                </tr>
-                <tr>
-                  <td>LIBERO-UMI</td>
-                  <td class="best">TBD</td>
-                  <td>TBD</td>
-                  <td>TBD</td>
-                  <td>TBD</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="table-note">数值待论文定稿后填入 · 均为 UMI-style 手腕鱼眼观测设定</p>
         </div>
       </div>
     </section>
