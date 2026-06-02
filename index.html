@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="VISTA: VIsion-grounded and phySics-validaTed Adaptation for UMI-style VLA Training" />
+  <meta name="description" content="VISTA: Vision-Grounded and Physics-Validated Adaptation of UMI data for VLA Training" />
   <title>VISTA | UMI-style VLA Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -132,7 +132,6 @@
       <div class="gap-point gap-point--visual" id="visual-gap">
         <div class="container-wide gap-point-inner">
           <span class="gap-index">01</span>
-          <h3 class="gap-point-title">Visual Grounding Mismatch</h3>
           <p class="gap-lead">
             Standard VLA and VLM pipelines are built on relatively global, pinhole-perspective supervision. UMI instead records wrist-mounted fisheye views that are local, gripper-centric, and visually far from this pretraining regime.
           </p>
@@ -140,7 +139,6 @@
 
         <div class="view-compare-grid container-wide">
           <article class="view-compare-card view-compare-card--main">
-            <p class="view-compare-label">VLM visual grounding</p>
             <div class="view-compare-media" data-slot="visual-main">
               <!-- 替换：assets/videos/main_view.mp4 -->
               <video class="view-compare-video" muted loop playsinline preload="metadata" aria-label="Main view demonstration">
@@ -151,16 +149,15 @@
                 <p class="ph-small">待上传 · 主视角 / 第三人称</p>
               </div>
             </div>
+            <p class="view-compare-label">VLM visual grounding</p>
             <ul class="view-compare-points">
               <li>Pinhole projection</li>
               <li>Global spatial cues</li>
-              <p>✅ Matches VLM pretraining</p>
-
             </ul>
+            <p class="view-compare-status view-compare-status--match">✅ Matches VLM pretraining</p>
           </article>
 
           <article class="view-compare-card view-compare-card--fisheye">
-            <p class="view-compare-label">Fisheye view in UMI</p>
             <div class="view-compare-media fisheye-preview" data-slot="visual-fisheye">
               <!-- 替换：assets/videos/fisheye_view.mp4 -->
               <video class="view-compare-video" muted loop playsinline preload="metadata" aria-label="UMI wrist fisheye demonstration">
@@ -171,32 +168,52 @@
                 <p class="ph-small">待上传 · 手腕鱼眼 · 155° FOV</p>
               </div>
             </div>
+            <p class="view-compare-label">Fisheye view in UMI</p>
             <ul class="view-compare-points">
               <li>Wrist-mounted gripper-centric (~155° FOV)</li>
               <li>Severe radial distortion</li>
               <li>Frequent gripper / arm self-occlusion</li>
             </ul>
-            <p class="view-compare-ood">❌ Out-of-distribution for standard VLMs</p>
+            <p class="view-compare-status view-compare-status--ood">❌ Out-of-distribution for standard VLMs</p>
           </article>
+        </div>
+
+        <div class="container-wide gap-point-inner">
+          <h3 class="gap-point-title">Visual Grounding Mismatch</h3>
         </div>
 
         <div class="gap-chart-row container-wide">
           <div class="gap-chart-copy">
             <p class="gap-chart-title">Perception degradation under fisheye observations</p>
-            <p class="gap-chart-desc">
-              We evaluate general and robot-specialized VLMs on four spatial / robot-centric VQA benchmarks using the same questions on original resized images (blue) versus fisheye-transformed images (orange). Every model shows a consistent score drop (2.4–6.0 percentage points), indicating that fisheye wrist views are out-of-distribution for current VLM visual representations and degrade grounding before policy learning even begins.
-            </p>
           </div>
-          <figure class="gap-chart-figure">
-            <img
-              src="assets/images/degradation.gif"
-              alt="Perception degradation under fisheye observations on robot VQA benchmarks"
-              width="1200"
-              height="706"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
+          <div class="gap-chart-grid" aria-label="Perception and policy degradation comparisons">
+            <figure class="gap-chart-figure">
+              <img
+                src="assets/images/series1_vlm_avg_score_arrow_drop_web_legend_transparent.gif"
+                alt="Perception degradation under fisheye observations for VLMs"
+                width="994"
+                height="578"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="gap-chart-desc">
+                Perception degradation under fisheye observations for VLMs. Each VLM entry reports performance on original and fisheye-transformed images on four benchmarks.
+              </figcaption>
+            </figure>
+            <figure class="gap-chart-figure">
+              <img
+                src="assets/images/policy_degradation_avg_score_arrow_drop_web_legend_transparent.gif"
+                alt="Policy degradation under UMI-style wrist-fisheye observations on LIBERO and RoboTwin"
+                width="942"
+                height="474"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="gap-chart-desc">
+                Policy degradation under UMI-style wrist-fisheye observations on LIBERO and RoboTwin. For each benchmark, we compare the separately fine-tuned standard-view policy with the wrist-only fisheye policy.
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </div>
 
