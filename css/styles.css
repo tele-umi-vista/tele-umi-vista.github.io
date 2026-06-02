@@ -923,6 +923,9 @@ video {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: min(720px, 100%);
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .physical-vali-item {
