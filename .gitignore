@@ -1,1 +1,4 @@
 *.pdf
+*.sh
+.gitattributes
+.DS_Store
