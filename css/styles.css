@@ -269,10 +269,6 @@ video {
   position: relative;
   min-height: 105vh;
   min-height: 105dvh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: clamp(1.25rem, 4vw, 2.75rem);
   background: var(--bg-deep);
 }
 
@@ -349,16 +345,22 @@ video {
 }
 
 .teaser-overlay {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 2;
-  width: 100%;
-  max-width: min(52rem, 100%);
-  padding: calc(var(--header-h) + 0.75rem) 1.5rem 0;
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0 1.5rem;
+  text-align: center;
   gap: clamp(1.25rem, 3vw, 1.85rem);
+  pointer-events: none;
+}
+
+.teaser-overlay a {
+  pointer-events: auto;
 }
 
 .teaser-copy {
@@ -2721,7 +2723,19 @@ video {
 .method-hero-screen {
   min-height: auto;
   justify-content: flex-start;
-  padding: 2.75rem 0 5rem;
+  padding: 2.75rem 0 0rem;
+}
+
+.method-hero-screen + .method-screen {
+  padding-top: 2rem;
+}
+
+.method-screen + .method-screen {
+  padding-top: 2rem;
+}
+
+.section-method #method-vqa {
+  padding-bottom: 2rem;
 }
 
 .section-method .section-title {
@@ -2763,7 +2777,7 @@ video {
 }
 
 .method-hero-body {
-  margin-top: 2.25rem;
+  margin-top: 1.5rem;
 }
 
 .method-screen-inner,

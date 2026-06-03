@@ -105,6 +105,16 @@
           </p>
         </div>
       </div>
+      <figure class="fig-architecture" data-slot="fig1-architecture">
+        <img
+          src="assets/images/method.jpg"
+          alt="UMI-π framework: UMI-VQA perception alignment, physical validation, two-stage co-training, and deployment"
+          width="1100"
+          height="421"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
     </section>
 
     <!-- ========== THE DUAL GAP ========== -->
@@ -126,10 +136,16 @@
         <div class="view-compare-grid container-wide">
           <article class="view-compare-card view-compare-card--main">
             <div class="view-compare-media" data-slot="visual-main">
-              <!-- 替换：assets/videos/main_view.mp4 -->
-              <video class="view-compare-video" muted loop playsinline preload="metadata" aria-label="Main view demonstration">
-                <!-- <source src="assets/videos/main_view.mp4" type="video/mp4" /> -->
-              </video>
+              <video
+                class="view-compare-video"
+                src="assets/videos/motiv_mismatch/main.mp4"
+                muted
+                loop
+                playsinline
+                autoplay
+                preload="metadata"
+                aria-label="Main view demonstration"
+              ></video>
               <div class="view-compare-placeholder placeholder-box">
                 <span class="ph-tag">Video · Main view</span>
                 <p class="ph-small">待上传 · 主视角 / 第三人称</p>
@@ -145,10 +161,16 @@
 
           <article class="view-compare-card view-compare-card--fisheye">
             <div class="view-compare-media fisheye-preview" data-slot="visual-fisheye">
-              <!-- 替换：assets/videos/fisheye_view.mp4 -->
-              <video class="view-compare-video" muted loop playsinline preload="metadata" aria-label="UMI wrist fisheye demonstration">
-                <!-- <source src="assets/videos/fisheye_view.mp4" type="video/mp4" /> -->
-              </video>
+              <video
+                class="view-compare-video"
+                src="assets/videos/motiv_mismatch/fish-eye.mp4"
+                muted
+                loop
+                playsinline
+                autoplay
+                preload="metadata"
+                aria-label="UMI wrist fisheye demonstration"
+              ></video>
               <div class="view-compare-placeholder placeholder-box">
                 <span class="ph-tag">Video · Fisheye</span>
                 <p class="ph-small">待上传 · 手腕鱼眼 · 155° FOV</p>
@@ -285,16 +307,6 @@
         <div class="container-wide">
           <h2 class="section-title center">The UMI-π Framework</h2>
         </div>
-        <figure class="fig-architecture" data-slot="fig1-architecture">
-          <img
-            src="assets/images/method.jpg"
-            alt="UMI-π framework: UMI-VQA perception alignment, physical validation, two-stage co-training, and deployment"
-            width="1100"
-            height="421"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
         <div class="container-wide method-hero-body">
           <div class="prose method-overview">
             <p>
@@ -387,7 +399,7 @@
                 </p>
                 <ul class="training-points">
                   <li>
-                    <strong>Action learning.</strong> Each continuous action chunk \(a_{t:t+H}\) is converted into a
+                    <strong>Action learning.</strong> Each continuous action chunk \(a_{t:t+H-1}\) is converted into a
                     sequence of discrete FAST tokens \(z_{1:N_a}\). Given visual observations \(o_t\), language
                     instruction \(l\), and robot state \(s_t\), the target output is the action-token sequence
                     \(z_{1:N_a}\).
