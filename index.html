@@ -35,20 +35,60 @@
     <section class="hero teaser" aria-label="Teaser">
       <div class="hero-media">
         <video class="hero-video" id="hero-video" autoplay muted loop playsinline poster="" aria-hidden="true">
-          <source src="assets/videos/hero_demo_logo.mp4" type="video/mp4" />
+          <source src="assets/videos/hero_demo_clean.mp4" type="video/mp4" />
         </video>
       </div>
 
       <div class="teaser-overlay">
-        <div class="teaser-copy">
-          <h1 class="teaser-brand" aria-label="VISTA">VISTA</h1>
-          <p class="teaser-desc">Vision-grounded and Physics-validated adaptation for UMI-style VLA training</p>
+        <div class="teaser-main">
+          <div class="teaser-copy">
+            <h1 class="teaser-brand" aria-label="VISTA">VISTA</h1>
+            <p class="teaser-desc">Vision-grounded and Physics-validated adaptation for UMI-style VLA training</p>
+          </div>
+          <div class="teaser-cta-block">
+          <div class="teaser-actions" role="group" aria-label="论文与资源链接">
+            <a class="teaser-btn" href="https://arxiv.org/abs/2606.04708" id="link-paper" target="_blank" rel="noopener noreferrer">
+              <svg class="teaser-btn-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM8 12h8v2H8v-2zm0 4h5v2H8v-2z"/></svg>
+              <span>Paper</span>
+            </a>
+            <a class="teaser-btn" href="#" id="link-code" target="_blank" rel="noopener noreferrer">
+              <svg class="teaser-btn-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.17 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span>Code</span>
+            </a>
+            <a class="teaser-btn" href="#" id="link-dataset" target="_blank" rel="noopener noreferrer">
+              <svg class="teaser-btn-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              <span>Dataset</span>
+            </a>
+            <a class="teaser-btn" href="#" id="link-models" target="_blank" rel="noopener noreferrer">
+              <svg class="teaser-btn-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+              <span>Models</span>
+            </a>
+          </div>
+        <div class="teaser-partners" aria-label="合作机构">
+          <div class="teaser-partners-panel">
+            <div class="teaser-partners-zone teaser-partners-zone--teleai">
+              <img
+                src="assets/images/teleai_logo.png"
+                alt="Institute of Artificial Intelligence, China Telecom (TeleAI)"
+                class="teaser-partner-logo teaser-partner-logo--teleai"
+                width="265"
+                height="48"
+                decoding="async"
+              />
+            </div>
+            <div class="teaser-partners-zone teaser-partners-zone--lumos">
+              <img
+                src="assets/images/logoLumos.png"
+                alt="Lumos Robotics"
+                class="teaser-partner-logo teaser-partner-logo--lumos"
+                width="120"
+                height="120"
+                decoding="async"
+              />
+            </div>
+          </div>
         </div>
-        <div class="teaser-actions" role="group" aria-label="论文与资源链接">
-          <a class="btn btn-ghost btn-teaser" href="#" id="link-paper">Paper</a>
-          <a class="btn btn-ghost btn-teaser" href="#" id="link-code">Code</a>
-          <a class="btn btn-ghost btn-teaser" href="#" id="link-dataset">UMI-VQA</a>
-          <a class="btn btn-ghost btn-teaser" href="#" id="link-models">Models</a>
+          </div>
         </div>
       </div>
 
@@ -87,7 +127,7 @@
           <sup>4</sup>Northwestern Polytechnical University<br />
           <sup>5</sup>Shanghai Jiao Tong University &nbsp;·&nbsp;
           <sup>6</sup>East China University of Science and Technology<br />
-          <sup>7</sup>Harbin Institute of Technology &nbsp;·&nbsp;
+          <sup>7</sup>Harbin Engineering University &nbsp;·&nbsp;
           <sup>8</sup>Fudan University
           <br />
           <span class="aff-note">† Equal contribution · ‡ Project lead · * Corresponding authors</span>
@@ -101,14 +141,14 @@
         <h2 class="section-label">Abstract</h2>
         <div class="prose">
           <p>
-            Universal Manipulation Interface (UMI) enables scalable real-world robot data collection without hardware-specific teleoperation, yet leveraging UMI data to train large-scale Vision-Language-Action (VLA) models remains fundamentally challenging. We identify two critical mismatches: wrist-mounted fisheye views, with severe radial distortion and local gripper-centric perspectives, are out-of-distribution for pretrained VLMs; and human-collected trajectories frequently violate kinematic limits, incur collisions, or exceed controller bandwidth, teaching VLA policies physically infeasible actions. To address the challenges, we present UMI-π, a framework that bridges this dual gap through three synergistic components. (i)&nbsp;UMI-VQA, the first large-scale VQA dataset tailored to wrist-mounted fisheye observations, aligns VLM representations to the distorted visual regime via auxiliary vision-language supervision. (ii)&nbsp;A systematic physical-validation pipeline performs a data-completeness pre-check and scores each valid trajectory for trajectory continuity, self-collision risk, and execution fidelity before it enters training. (iii)&nbsp;A two-stage co-training recipe jointly learns vision-language grounding on UMI-VQA and action prediction on validated trajectories. Our experiments empirically show that incorporating UMI-VQA consistently improves downstream policy performance, and that physical-validation scores are strongly predictive of deployment success. On diverse simulation and real-world manipulation tasks, UMI-π significantly outperforms strong baselines including π<sub>0.5</sub>, LingBot, and Wall-X. We release the physical-validation pipeline, UMI-VQA, validated trajectory data, and the pre-trained model for the community.
+            Universal Manipulation Interface (UMI) enables scalable real-world robot data collection without hardware-specific teleoperation, yet leveraging UMI data to train large-scale Vision-Language-Action (VLA) models remains fundamentally challenging. We identify two critical mismatches: wrist-mounted fisheye views, with severe radial distortion and local gripper-centric perspectives, are out-of-distribution for pretrained VLMs; and human-collected trajectories frequently violate kinematic limits, incur collisions, or exceed controller bandwidth, teaching VLA policies physically infeasible actions. To address the challenges, we present <strong>VISTA</strong>, a framework that bridges this dual gap through three synergistic components. (i)&nbsp;UMI-VQA, the first large-scale VQA dataset tailored to wrist-mounted fisheye observations, aligns VLM representations to the distorted visual regime via auxiliary vision-language supervision. (ii)&nbsp;A systematic physical-validation pipeline performs a data-completeness pre-check and scores each valid trajectory for trajectory continuity, self-collision risk, and execution fidelity before it enters training. (iii)&nbsp;A two-stage co-training recipe jointly learns vision-language grounding on UMI-VQA and action prediction on validated trajectories. Our experiments empirically show that incorporating UMI-VQA consistently improves downstream policy performance, and that physical-validation scores are strongly predictive of deployment success. On diverse simulation and real-world manipulation tasks, VISTA significantly outperforms strong baselines including \( \pi_{0.5} \), LingBot-VLA, and Wall-X. We release the physical-validation pipeline, UMI-VQA, validated trajectory data, and the pre-trained model for the community.
           </p>
         </div>
       </div>
       <figure class="fig-architecture" data-slot="fig1-architecture">
         <img
           src="assets/images/method.jpg"
-          alt="UMI-π framework: UMI-VQA perception alignment, physical validation, two-stage co-training, and deployment"
+          alt="VISTA framework: UMI-VQA perception alignment, physical validation, two-stage co-training, and deployment"
           width="1100"
           height="421"
           loading="lazy"
@@ -305,12 +345,12 @@
     <section class="section section-method" id="method">
       <div class="method-hero-screen">
         <div class="container-wide">
-          <h2 class="section-title center">The UMI-π Framework</h2>
+          <h2 class="section-title center">The VISTA Framework</h2>
         </div>
         <div class="container-wide method-hero-body">
           <div class="prose method-overview">
             <p>
-              To address the inherent mismatches of raw UMI data, we propose <strong>UMI-π</strong>, a UMI-oriented VLA framework comprising UMI-VQA for perceptual alignment, a systematic trajectory-level physical validation pipeline for embodiment-aware data curation, and a two-stage co-training recipe with a flow-matching action expert.<br />
+              To address the inherent mismatches of raw UMI data, we propose <strong>VISTA</strong>, a UMI-oriented VLA framework comprising UMI-VQA for perceptual alignment, a systematic trajectory-level physical validation pipeline for embodiment-aware data curation, and a two-stage co-training recipe with a flow-matching action expert.<br />
               <strong>Perceptual alignment.</strong> We first tackle the visual domain gap by introducing an 8M-sample UMI-VQA dataset, adapting the model to wrist-mounted fisheye observations.<br />
               <strong>Physical validation.</strong> Next, we enforce physical plausibility with a data-completeness pre-check and trajectory scoring for continuity, self-collision risk, and execution fidelity, filtering out unexecutable human motions.<br />
               <strong>Two-stage co-training.</strong> Finally, we employ a two-stage training recipe: an initial VQA-Action co-training phase for representation alignment, followed by a flow-matching action expert for continuous control.
@@ -383,7 +423,7 @@
           <section class="training-phase training-phase--pretrain" aria-labelledby="training-pretrain-title">
             <h4 class="training-phase-title" id="training-pretrain-title">Pre-training</h4>
             <p class="method-lead training-phase-lead">
-              UMI-π is pre-trained on large-scale perception-aligned corpora comprising 8M UMI-VQA samples and 100K
+              VISTA is pre-trained on large-scale perception-aligned corpora comprising 8M UMI-VQA samples and 100K
               real-world robot trajectories. Pre-training proceeds in two stages: autoregressive co-training on VQA and
               discretized actions to align the VLM backbone with the fisheye observation regime, followed by
               continuous-action refinement via a knowledge-isolated flow-matching expert.
@@ -431,7 +471,7 @@
           <section class="training-phase training-phase--finetune" aria-labelledby="training-finetune-title">
             <h4 class="training-phase-title" id="training-finetune-title">Downstream Task Fine-tuning</h4>
             <p class="method-lead training-phase-lead">
-              After pre-training, UMI-π is adapted to downstream tasks and target embodiments. We first apply a strict
+              After pre-training, VISTA is adapted to downstream tasks and target embodiments. We first apply a strict
               physical validation threshold to filter downstream task data for the specific deployment robot, removing
               trajectories with kinematic violations, self-collision risks, or poor replay fidelity.
             </p>
@@ -447,7 +487,7 @@
           <div class="container-wide training-deploy-copy">
             <h4 class="training-deploy-title">Multi-robot deployment System</h4>
             <p class="training-deploy-desc">
-              To fully exploit the cross-embodiment potential of UMI-π, we implement a pure Python distributed deployment architecture for heterogeneous robotic arms.
+              To fully exploit the cross-embodiment potential of VISTA, we implement a pure Python distributed deployment architecture for heterogeneous robotic arms.
 The system uses Zenoh as the communication middleware, enabling transparent shared-memory or network-level transmission across local processes, LANs, or WANs.
 State streams from multiple arms are aggregated to distributed GPU compute nodes for batched inference; predicted action chunks are temporally ensembled and routed back to the respective robots via synchronous RPC calls to ensure strict temporal alignment and prevent command accumulation.
 This design eliminates heavy ROS dependencies and allows seamless integration of new robot arms that satisfy the UMI end-effector mounting specification. 
@@ -494,27 +534,14 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
             <h3>Fisheye observations degrade policy learning</h3>
             <div class="results-evidence-block">
               <p class="results-evidence-text">
-                We evaluate the impact of UMI-style observations on policy learning. Table 1 isolates view factors on
-                RoboTwin, showing that shifting from standard multi-view to local, distorted wrist-fisheye observations
-                drops the \( \pi_{0.5} \) success rate from 82.0% to 59.4%. 
-              </p>
-              <figure class="results-table-figure">
-                <img
-                  src="assets/images/diag_table1.jpg"
-                  alt="Table 1: View-factor ablation in RoboTwin under different observation settings"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </figure>
-              <p class="results-evidence-text">
-                Table 2 confirms this genuine perception
+                We evaluate the impact of UMI-style observations on policy learning. Table 1 confirms this genuine perception
                 bottleneck across multiple VLA models (\( \pi_{0.5} \), LingBot-VLA, WALL-X) and benchmarks (LIBERO,
                 RoboTwin), demonstrating consistent performance degradation under wrist-fisheye training.
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table2.jpg"
-                  alt="Table 2: Policy degradation under wrist-fisheye observations across models and benchmarks"
+                  src="assets/images/diag_table1.jpg"
+                  alt="Table 1: Policy degradation under wrist-fisheye observations across models and benchmarks"
                   loading="lazy"
                   decoding="async"
                 />
@@ -527,15 +554,15 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
             <div class="results-evidence-block">
               <p class="results-evidence-text">
                 To quantify visual reasoning degradation, we evaluate five general and robot-specialized VLMs across
-                four spatial benchmarks. As shown in Table 3, fisheye-transformed images cause a consistent performance
+                four spatial benchmarks. As shown in Table 2, fisheye-transformed images cause a consistent performance
                 drop across all models (averaging an 8.6% relative degradation) compared to standard perspectives. This
                 confirms that pretrained VLMs lose critical spatial and object understanding under distorted
                 wrist-fisheye views, necessitating our perception-aligned VQA.
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table3.jpg"
-                  alt="Table 3: Visual reasoning degradation under fisheye-transformed images across VLMs and spatial benchmarks"
+                  src="assets/images/diag_table2.jpg"
+                  alt="Table 2: Visual reasoning degradation under fisheye-transformed images across VLMs and spatial benchmarks"
                   loading="lazy"
                   decoding="async"
                 />
@@ -583,8 +610,8 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table4.jpg"
-                  alt="Table 4: Policy performance comparison between wrist-fisheye-aligned UMI-VQA and standard-perspective VQA"
+                  src="assets/images/diag_table3.jpg"
+                  alt="Table 3: Policy performance comparison between wrist-fisheye-aligned UMI-VQA and standard-perspective VQA"
                   loading="lazy"
                   decoding="async"
                 />
@@ -611,8 +638,8 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table5.jpg"
-                  alt="Table 5: Physical validation score distribution across raw UMI trajectories and validated subsets"
+                  src="assets/images/diag_table4.jpg"
+                  alt="Table 4: Physical validation score distribution across raw UMI trajectories and validated subsets"
                   loading="lazy"
                   decoding="async"
                 />
@@ -653,8 +680,8 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table6.jpg"
-                  alt="Table 6: Physical validation score distribution across different robotic platforms"
+                  src="assets/images/diag_table5.jpg"
+                  alt="Table 5: Physical validation score distribution across different robotic platforms"
                   loading="lazy"
                   decoding="async"
                 />
@@ -685,8 +712,8 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table7.jpg"
-                  alt="Table 7: Simulation performance comparison between VISTA and baselines on RoboTwin-UMI and LIBERO-UMI benchmarks"
+                  src="assets/images/diag_table6.jpg"
+                  alt="Table 6: Simulation performance comparison between VISTA and baselines on RoboTwin-UMI and LIBERO-UMI benchmarks"
                   loading="lazy"
                   decoding="async"
                 />
@@ -707,8 +734,8 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
             </p>
             <figure class="results-table-figure">
               <img
-                src="assets/images/diag_table8.jpg"
-                alt="Table 8: Real-world performance comparison between VISTA and baselines on 20 UMI-collected manipulation tasks"
+                src="assets/images/diag_table7.jpg"
+                alt="Table 7: Real-world performance comparison between VISTA and baselines on 20 UMI-collected manipulation tasks"
                 loading="lazy"
                 decoding="async"
               />
@@ -847,7 +874,7 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
             <a class="results-anchor-tab" href="#ablation-attention">Attntion Analysis</a>
           </div>
 
-          <h4 class="results-panel-title">Ablations Experiments</h4>
+          <h4 class="results-panel-title">Ablations and Analysis</h4>
           <p class="results-evidence-text">
 
           </p>
@@ -860,8 +887,8 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
               </p>
               <figure class="results-table-figure">
                 <img
-                  src="assets/images/diag_table9.jpg"
-                  alt="Table 9: Component ablation results for VISTA"
+                  src="assets/images/diag_table8.jpg"
+                  alt="Table 8: Component ablation results for VISTA"
                   loading="lazy"
                   decoding="async"
                 />
@@ -905,23 +932,25 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
       <div class="container-wide">
         <h2 class="section-title center">Open Source Release</h2>
         <div class="resource-grid">
-          <a class="resource-card" href="#" id="res-vqa">
+          <a class="resource-card" href="#" id="res-vqa" target="_blank" rel="noopener noreferrer">
             <span class="resource-icon">◈</span>
             <h3>UMI-VQA Dataset</h3>
             <p>8M wrist-fisheye vision-language samples across five capability subsets.</p>
-            <span class="resource-badge">Coming soon</span>
           </a>
-          <a class="resource-card" href="#" id="res-traj">
+          <a class="resource-card" href="#" id="res-traj" target="_blank" rel="noopener noreferrer">
             <span class="resource-icon">◎</span>
             <h3>Physically Validated Trajectories</h3>
             <p>~100k real-world UMI paths scored and filtered via cross-embodiment Mink replay.</p>
-            <span class="resource-badge">Coming soon</span>
           </a>
-          <a class="resource-card" href="#" id="res-models">
+          <a class="resource-card" href="#" id="res-checkpoints" target="_blank" rel="noopener noreferrer">
             <span class="resource-icon">◇</span>
-            <h3>Pre-trained VLA &amp; Pipeline</h3>
-            <p>UMI-π checkpoints, validation tooling, and two-stage training code.</p>
-            <span class="resource-badge">Coming soon</span>
+            <h3>VLA Checkpoints</h3>
+            <p>Pre-trained VISTA checkpoints.</p>
+          </a>
+          <a class="resource-card" href="#" id="res-code" target="_blank" rel="noopener noreferrer">
+            <span class="resource-icon">▣</span>
+            <h3>Codes</h3>
+            <p>Physical-validation pipeline, two-stage training recipe, and multi-robot deployment tooling.</p>
           </a>
         </div>
       </div>
@@ -933,10 +962,10 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
         <h2 class="section-title">Citation</h2>
         <div class="bibtex-box">
           <pre id="bibtex-content"><code>@article{yang2026vista,
-  title={{VISTA}: {VIsion}-grounded and phy{Sics}-valida{Ted} Adaptation for {UMI}-style {VLA} Training},
-  author={Yang, Siyuan and Guo, Linzheng and Lu, Ouyang and Zhaxizhuoma and Zhang, Daoran and Wang, Xinmiao and Xiao, Ting and Yan, Fangzheng and Chen, Zhijun and Ding, Yan and Yu, Chao and Bai, Chenjia and Li, Xuelong},
-  journal={arXiv preprint},
-  year={2026},
+ title={VISTA: Vision-Grounded and Physics-Validated Adaptation of UMI data for VLA Training}, 
+ author={Siyuan Yang and Linzheng Guo and Ouyang Lu and Zhaxizhuoma and Daoran Zhang and Xinmiao Wang and Ting Xiao and Fangzheng Yan and Zhijun Chen and Yan Ding and Chao Yu and Chenjia Bai and Xuelong Li},
+ journal={arXiv preprint arXiv:2606.04708},
+ year={2026},
 }</code></pre>
           <button type="button" class="btn btn-copy" id="copy-bibtex">Copy BibTeX</button>
         </div>

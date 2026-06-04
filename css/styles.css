@@ -353,14 +353,24 @@ video {
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0 1.5rem;
+  padding: calc(var(--header-h) + 1rem) 1.5rem 1.5rem;
   text-align: center;
-  gap: clamp(1.25rem, 3vw, 1.85rem);
   pointer-events: none;
 }
 
 .teaser-overlay a {
   pointer-events: auto;
+}
+
+.teaser-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 3vw, 1.85rem);
+  width: 100%;
+  max-width: 52rem;
 }
 
 .teaser-copy {
@@ -400,27 +410,100 @@ video {
   max-width: 34rem;
 }
 
-/* Teaser CTA：毛玻璃条 + 紧凑按钮 */
+.teaser-cta-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Teaser CTA：独立毛玻璃胶囊按钮（参考 PRTS） */
 .teaser-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem 0.6rem;
-  padding: 0.65rem 0.85rem;
+  gap: 0.75rem 0.85rem;
+}
+
+.teaser-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.72rem 1.5rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.95) inset,
-    0 8px 32px rgba(15, 23, 42, 0.08);
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #f8fafc;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 4px 24px rgba(2, 6, 23, 0.18);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition:
+    background 0.22s var(--ease),
+    border-color 0.22s var(--ease),
+    transform 0.22s var(--ease);
+}
+
+.teaser-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.62);
+  transform: translateY(-1px);
+  color: #ffffff;
+}
+
+.teaser-btn-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  opacity: 0.95;
+}
+
+/* Teaser 合作机构：单框内左右分区，兼顾 TeleAI / Lumos 对比度 */
+.teaser-partners {
+  pointer-events: auto;
+}
+
+.teaser-partners-panel {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  max-width: calc(100vw - 2rem);
+  padding: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 6px 28px rgba(2, 6, 23, 0.16);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 
-.btn-teaser {
-  padding: 0.48rem 1.05rem;
-  font-size: 0.8125rem;
+.teaser-partners-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.teaser-partner-logo {
+  display: block;
+  width: auto;
+  object-fit: contain;
+}
+
+.teaser-partner-logo--teleai {
+  height: 32px;
+  max-width: min(210px, 50vw);
+}
+
+.teaser-partner-logo--lumos {
+  height: 42px;
+  max-width: min(150px, 32vw);
 }
 
 /* ── Paper intro（标题 · 作者，窄幅排版） ── */
@@ -1705,6 +1788,7 @@ video {
 }
 
 #model-real-robot-eval .results-table-figure {
+  max-width: 350px;
   margin-bottom: 1.15rem;
 }
 
@@ -2412,25 +2496,41 @@ video {
     0 1px 2px rgba(2, 6, 23, 0.8);
 }
 
-.hero.has-video .teaser-actions {
-  background: rgba(255, 255, 255, 0.72);
-  border-color: rgba(255, 255, 255, 0.92);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.98) inset,
-    0 12px 40px rgba(15, 23, 42, 0.12);
+.hero.has-video .teaser-btn {
+  color: #f8fafc;
 }
 
 @media (max-width: 520px) {
   .teaser-actions {
     flex-direction: column;
     width: 100%;
-    max-width: 18rem;
-    border-radius: 1.25rem;
-    padding: 0.75rem;
+    max-width: 14rem;
   }
 
-  .teaser-actions .btn-teaser {
+  .teaser-btn {
     width: 100%;
+  }
+
+  .teaser-cta-block {
+    gap: 0.7rem;
+  }
+
+  .teaser-partners-panel {
+    flex-direction: column;
+    max-width: 18rem;
+  }
+
+  .teaser-partners-zone {
+    width: 100%;
+    padding: 0.35rem 0.85rem;
+  }
+
+  .teaser-partner-logo--teleai {
+    height: 28px;
+  }
+
+  .teaser-partner-logo--lumos {
+    height: 80px;
   }
 }
 
@@ -3463,10 +3563,10 @@ video {
   font-size: 0.92em;
 }
 
-/* Open Source cards: keep a polished 3-column layout */
+/* Open Source cards: 4-column layout */
 .section-opensource .resource-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem;
   margin-top: 1.6rem;
 }
@@ -3475,7 +3575,7 @@ video {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 15.5rem;
+  min-height: 11.5rem;
   padding: 1.4rem 1.25rem;
   background: #fff;
   border: 1px solid rgba(15, 23, 42, 0.12);
@@ -3511,12 +3611,7 @@ video {
   color: var(--text-muted);
 }
 
-.section-opensource .resource-badge {
-  margin-top: auto;
-  align-self: flex-start;
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .section-opensource .resource-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

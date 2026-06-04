@@ -481,18 +481,23 @@
     renderMath();
   }
 
-  /* Placeholder links — update when URLs are ready */
-  const TODO = "#";
+  /* External resource links */
   [
-    ["link-paper", TODO],
-    ["link-code", TODO],
-    ["link-dataset", TODO],
-    ["link-models", TODO],
-    ["res-vqa", TODO],
-    ["res-traj", TODO],
-    ["res-models", TODO],
+    ["link-paper", "https://arxiv.org/abs/2606.04708"],
+    ["link-code", "https://github.com/TeleHuman/umi-vista"],
+    ["link-dataset", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["link-models", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["res-vqa", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["res-traj", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["res-checkpoints", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["res-code", "https://github.com/TeleHuman/umi-vista"],
   ].forEach(([id, href]) => {
     const el = document.getElementById(id);
-    if (el) el.href = href;
+    if (!el) return;
+    el.href = href;
+    if (href && href !== "#" && !href.startsWith("#")) {
+      el.target = "_blank";
+      el.rel = "noopener noreferrer";
+    }
   });
 })();
