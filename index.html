@@ -189,12 +189,12 @@
                 <p class="ph-small">待上传 · 主视角 / 第三人称</p>
               </div>
             </div>
-            <p class="view-compare-label">VLM visual grounding</p>
+            <p class="view-compare-label">VLM/VLA visual grounding</p>
             <ul class="view-compare-points">
               <li>Pinhole projection</li>
               <li>Global spatial cues</li>
             </ul>
-            <p class="view-compare-status view-compare-status--match">✅ Matches VLM pretraining</p>
+            <p class="view-compare-status view-compare-status--match">✅ Matches VLM/VLA pretraining</p>
           </article>
 
           <article class="view-compare-card view-compare-card--fisheye">
@@ -216,11 +216,10 @@
             </div>
             <p class="view-compare-label">Fisheye view in UMI</p>
             <ul class="view-compare-points">
-              <li>Wrist-mounted gripper-centric (~155° FOV)</li>
-              <li>Severe radial distortion</li>
-              <li>Frequent gripper / arm self-occlusion</li>
+              <li>Wide-angle wrist-mounted, gripper-centric view</li>
+              <li>Noticeable fisheye/radial distortion</li>
             </ul>
-            <p class="view-compare-status view-compare-status--ood">❌ Out-of-distribution for standard VLMs</p>
+            <p class="view-compare-status view-compare-status--ood">❌ Out-of-distribution for standard VLMs/VLAS</p>
           </article>
         </div>
 
@@ -700,11 +699,11 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
             <h3>Simulation benchmark</h3>
             <div class="results-evidence-block">
               <p class="results-evidence-text">
-                We evaluate VISTA against three VLA baselines (\( \pi_{0.5} \), LingBot, and WALL-X) on two adapted
+                We evaluate VISTA against three VLA baselines (\( \pi_{0.5} \), LingBot-VLA, and WALL-X) on two adapted
                 UMI-style simulation benchmarks: RoboTwin-UMI and LIBERO-UMI. To ensure a fair comparison that isolates
                 our architectural adaptations, all models are trained on the exact same recollected wrist-fisheye
                 demonstrations. VISTA achieves the highest performance across both benchmarks, reaching an average
-                success rate of 81.3%. This outperforms \( \pi_{0.5} \) by 5.5 points, LingBot by 15.5 points, and
+                success rate of 81.3%. This outperforms \( \pi_{0.5} \) by 5.5 points, LingBot-VLA by 15.5 points, and
                 WALL-X by 38.7 points, demonstrating that explicit adaptation to fisheye observations and validated
                 action data significantly enhances policy learning.
               </p>
@@ -726,7 +725,7 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
               capabilities like precise spatial localization and dual wrist-view integration. All methods are evaluated
               under strictly controlled conditions, utilizing the same validated UMI dataset, robot platform, and
               object configurations across 20 trials per task. VISTA achieves the highest average success rate of
-              59.8%, delivering a 7.0-point absolute gain over \( \pi_{0.5} \) and outperforming LingBot by 28.5
+              59.8%, delivering a 7.0-point absolute gain over \( \pi_{0.5} \) and outperforming LingBot-VLA by 28.5
               points. These results prove that the benefits of VISTA's UMI-oriented design successfully transfer to
               robust, physical robot deployment.
             </p>
@@ -938,7 +937,7 @@ This design eliminates heavy ROS dependencies and allows seamless integration of
           <a class="resource-card" href="#" id="res-traj" target="_blank" rel="noopener noreferrer">
             <span class="resource-icon">◎</span>
             <h3>Physically Validated Trajectories</h3>
-            <p>~100k real-world UMI paths scored and filtered via cross-embodiment Mink replay.</p>
+            <p>5k real-world UMI demos scored and filtered via cross-embodiment Mink replay.</p>
           </a>
           <a class="resource-card" href="#" id="res-checkpoints" target="_blank" rel="noopener noreferrer">
             <span class="resource-icon">◇</span>
