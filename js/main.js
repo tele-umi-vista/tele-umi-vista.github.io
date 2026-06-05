@@ -486,10 +486,10 @@
     ["link-paper", "https://arxiv.org/abs/2606.04708"],
     ["link-code", "https://github.com/TeleHuman/umi-vista"],
     ["link-dataset", "https://huggingface.co/collections/TeleEmbodied/vista"],
-    ["link-models", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["link-models", "https://huggingface.co/TeleEmbodied/VISTA"],
     ["res-vqa", "https://huggingface.co/datasets/TeleEmbodied/UMI-VQA-8M"],
     ["res-traj", "https://huggingface.co/datasets/TeleEmbodied/VISTA-UMI-5K"],
-    ["res-checkpoints", "https://huggingface.co/collections/TeleEmbodied/vista"],
+    ["res-checkpoints", "https://huggingface.co/TeleEmbodied/VISTA"],
     ["res-code", "https://github.com/TeleHuman/umi-vista"],
   ].forEach(([id, href]) => {
     const el = document.getElementById(id);
